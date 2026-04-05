@@ -1,0 +1,69 @@
+{
+  "name": "@revivejs/react-highcharts",
+  "version": "17.0.0",
+  "description": "A thin React 17 wrapper for Highcharts with versioned demos.",
+  "keywords": [
+    "react",
+    "react-library",
+    "typescript",
+    "highcharts",
+    "charts",
+    "react-highcharts",
+    "highcharts-react",
+    "stock-chart",
+    "heatmap",
+    "3d-chart",
+    "wrapper",
+    "ui-component",
+    "revived",
+    "maintained"
+  ],
+  "homepage": "https://alexandroit.github.io/react-highcharts/",
+  "bugs": {
+    "url": "https://github.com/alexandroit/react-highcharts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexandroit/react-highcharts.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "clean": "rm -rf dist docs/react-17",
+    "docs:install:react-17": "cd docs-src/react-17 && npm install",
+    "build:docs:react-17": "cd docs-src/react-17 && npm run build",
+    "build:docs": "npm run build:docs:react-17",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "highcharts": ">=12.5.0",
+    "react": ">=17.0.0 <18.0.0",
+    "react-dom": ">=17.0.0 <18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.91",
+    "@types/react-dom": "17.0.26",
+    "highcharts": "12.5.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3"
+  }
+}

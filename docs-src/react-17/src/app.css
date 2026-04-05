@@ -1,0 +1,310 @@
+:root {
+  color: #102033;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(254, 228, 179, 0.5), transparent 32%),
+    radial-gradient(circle at left 18%, rgba(170, 219, 255, 0.4), transparent 28%),
+    linear-gradient(180deg, #fff9f0 0%, #f5fbff 55%, #eef4fb 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+}
+
+code,
+pre {
+  font-family: "SFMono-Regular", "Consolas", monospace;
+}
+
+.shell {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(320px, 1fr);
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.hero-card,
+.section-card,
+.log-panel {
+  border: 1px solid rgba(16, 32, 51, 0.1);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 50px rgba(17, 55, 94, 0.12);
+}
+
+.hero-card,
+.section-card {
+  padding: 28px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #102033;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: #102033;
+}
+
+h1 {
+  margin-top: 18px;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 0.98;
+}
+
+.lead,
+.section-heading p,
+.demo-copy p,
+.log-panel p,
+.hero-card article p {
+  color: #4b6178;
+  line-height: 1.65;
+}
+
+.lead {
+  max-width: 62ch;
+  margin: 16px 0 0;
+  font-size: 1.04rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.feature-grid article {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(238, 244, 251, 0.8), rgba(255, 255, 255, 0.92));
+  border: 1px solid rgba(16, 32, 51, 0.08);
+}
+
+.feature-grid h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.feature-grid p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.setup-card h2 {
+  margin-bottom: 18px;
+  font-size: 1.8rem;
+}
+
+.setup-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.setup-list span {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.code {
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #102033;
+  color: #eff6ff;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 24px;
+  align-items: start;
+}
+
+.main-column {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.section-heading p {
+  margin: 0;
+}
+
+.demo-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(16, 32, 51, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 249, 255, 0.92));
+}
+
+.demo-card + .demo-card {
+  margin-top: 18px;
+}
+
+.demo-copy h3 {
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+}
+
+.demo-copy p {
+  margin: 0 0 14px;
+}
+
+.chart-frame {
+  min-width: 0;
+  overflow: hidden;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 32, 51, 0.08);
+  background: #fff;
+}
+
+.chart-host {
+  min-height: 380px;
+}
+
+.chart-placeholder {
+  display: grid;
+  place-items: center;
+  color: #4b6178;
+  font-weight: 700;
+  background:
+    linear-gradient(135deg, rgba(238, 244, 251, 0.7), rgba(255, 249, 240, 0.9));
+}
+
+.module-error {
+  margin: 12px 0 0;
+  color: #b14a36;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.action {
+  margin-top: 14px;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: #c7583d;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.log-panel {
+  position: sticky;
+  top: 24px;
+  padding: 22px;
+}
+
+.log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.clear {
+  border: 1px solid rgba(16, 32, 51, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  padding: 8px 14px;
+  color: #102033;
+  cursor: pointer;
+}
+
+.log-list {
+  display: grid;
+  gap: 10px;
+}
+
+.log-item {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #eff6ff;
+  border: 1px solid rgba(16, 32, 51, 0.08);
+  color: #35506b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1150px) {
+  .hero,
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .log-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .shell {
+    padding: 20px 14px 42px;
+  }
+
+  .hero-card,
+  .section-card,
+  .log-panel {
+    padding: 20px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-host {
+    min-height: 320px;
+  }
+}
