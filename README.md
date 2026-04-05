@@ -1,16 +1,16 @@
 # @revivejs/react-highcharts
 
-> A maintained **React 18 wrapper for Highcharts** with a thin component API, imperative ref access, `stockChart` support, and versioned live demos.
+> A maintained **React 19 wrapper for Highcharts** with a thin component API, imperative ref access, `stockChart` support, and versioned live demos.
 
 [![npm version](https://img.shields.io/npm/v/@revivejs/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@revivejs/react-highcharts)
 [![npm downloads](https://img.shields.io/npm/dt/@revivejs/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@revivejs/react-highcharts)
 [![license](https://img.shields.io/npm/l/@revivejs/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts/blob/master/LICENSE)
-[![React 18](https://img.shields.io/badge/React-18-blue?style=flat-square&logo=react)](https://react.dev)
+[![React 19](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)](https://react.dev)
 [![Highcharts](https://img.shields.io/badge/Highcharts-12.5-navy?style=flat-square)](https://www.highcharts.com)
 
 **[Documentation & Live Demos](https://alexandroit.github.io/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@revivejs/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
 
-**Latest version:** `18.0.0`
+**Latest version:** `19.0.0`
 
 ## Why this library?
 
@@ -27,6 +27,7 @@ That makes it easy to keep React in charge of composition while still using the 
 
 | Package version | React version | Highcharts version | Demo link |
 | :---: | :---: | :---: | :--- |
+| **19.0.0** | **19.2.x** | **12.5.x** | [React 19 demo](https://alexandroit.github.io/react-highcharts/react-19/) |
 | **18.0.0** | **18.3.x** | **12.5.x** | [React 18 demo](https://alexandroit.github.io/react-highcharts/react-18/) |
 | **17.0.0** | **17.0.x** | **12.5.x** | [React 17 demo](https://alexandroit.github.io/react-highcharts/react-17/) |
 
@@ -136,6 +137,11 @@ export function ControlledChart() {
 | `containerProps` | `HTMLAttributes<HTMLDivElement>` | Additional props for the chart container. |
 
 ## Changelog
+
+### 19.0.0
+- Updated the library line for React 19.2
+- Added the `react-19` demo app and made it the latest docs line
+- Kept the wrapper API aligned with the React 17 and 18 lines
 
 ### 18.0.0
 - Updated the library line for React 18.3

@@ -1,7 +1,7 @@
 {
   "name": "@revivejs/react-highcharts",
-  "version": "18.0.0",
-  "description": "A thin React 18 wrapper for Highcharts with versioned demos.",
+  "version": "19.0.0",
+  "description": "A thin React 19 wrapper for Highcharts with versioned demos.",
   "keywords": [
     "react",
     "react-library",
@@ -46,25 +46,27 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
-    "clean": "rm -rf dist docs/react-17 docs/react-18",
+    "clean": "rm -rf dist docs/react-17 docs/react-18 docs/react-19",
     "docs:install:react-17": "cd docs-src/react-17 && npm install",
     "docs:install:react-18": "cd docs-src/react-18 && npm install",
+    "docs:install:react-19": "cd docs-src/react-19 && npm install",
     "build:docs:react-17": "cd docs-src/react-17 && npm run build",
     "build:docs:react-18": "cd docs-src/react-18 && npm run build",
-    "build:docs": "npm run build:docs:react-18",
+    "build:docs:react-19": "cd docs-src/react-19 && npm run build",
+    "build:docs": "npm run build:docs:react-19",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "highcharts": ">=12.5.0",
-    "react": ">=17.0.0 <19.0.0",
-    "react-dom": ">=17.0.0 <19.0.0"
+    "react": ">=17.0.0 <20.0.0",
+    "react-dom": ">=17.0.0 <20.0.0"
   },
   "devDependencies": {
-    "@types/react": "18.3.28",
-    "@types/react-dom": "18.3.7",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
     "highcharts": "12.5.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "tsup": "8.5.1",
     "typescript": "5.9.3"
   }
