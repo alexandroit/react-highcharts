@@ -10,7 +10,7 @@
 
 **[Documentation & Live Demos](https://alexandroit.github.io/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@revivejs/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
 
-**Latest version:** `19.0.0`
+**Latest version:** `19.0.1`
 
 ## Why this library?
 
@@ -27,7 +27,7 @@ That makes it easy to keep React in charge of composition while still using the 
 
 | Package version | React version | Highcharts version | Demo link |
 | :---: | :---: | :---: | :--- |
-| **19.0.0** | **19.2.x** | **12.5.x** | [React 19 demo](https://alexandroit.github.io/react-highcharts/react-19/) |
+| **19.0.1** | **19.2.x** | **12.5.x** | [React 19 demo](https://alexandroit.github.io/react-highcharts/react-19/) |
 | **18.0.0** | **18.3.x** | **12.5.x** | [React 18 demo](https://alexandroit.github.io/react-highcharts/react-18/) |
 | **17.0.0** | **17.0.x** | **12.5.x** | [React 17 demo](https://alexandroit.github.io/react-highcharts/react-17/) |
 
@@ -137,6 +137,10 @@ export function ControlledChart() {
 | `containerProps` | `HTMLAttributes<HTMLDivElement>` | Additional props for the chart container. |
 
 ## Changelog
+
+### 19.0.1
+- Improved responsive chart behavior in the published wrapper by reflowing on container resize
+- Updated the React 17, 18, and 19 docs so charts and the event log stack cleanly across mobile and desktop layouts
 
 ### 19.0.0
 - Updated the library line for React 19.2

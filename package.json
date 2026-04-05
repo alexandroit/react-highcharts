@@ -1,6 +1,6 @@
 {
   "name": "@revivejs/react-highcharts",
-  "version": "19.0.0",
+  "version": "19.0.1",
   "description": "A thin React 19 wrapper for Highcharts with versioned demos.",
   "keywords": [
     "react",
