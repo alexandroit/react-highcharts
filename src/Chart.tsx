@@ -46,6 +46,7 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
   const chartRef = useRef<Highcharts.Chart | null>(null);
   const skipNextUpdateRef = useRef(true);
   const onReadyRef = useRef(onChartReady);
+  const frameRef = useRef<number | null>(null);
 
   onReadyRef.current = onChartReady;
 
@@ -59,6 +60,10 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
   );
 
   function destroyChart() {
+    if (frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    }
     chartRef.current?.destroy();
     chartRef.current = null;
   }
@@ -92,6 +97,17 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
     skipNextUpdateRef.current = true;
   }
 
+  function scheduleReflow() {
+    if (frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+    }
+
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = null;
+      chartRef.current?.reflow();
+    });
+  }
+
   useIsomorphicLayoutEffect(() => {
     createChart();
 
@@ -99,6 +115,37 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
       destroyChart();
     };
   }, [highcharts, constructorType]);
+
+  useIsomorphicLayoutEffect(() => {
+    const container = containerRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    const handleResize = () => {
+      scheduleReflow();
+    };
+
+    let resizeObserver: ResizeObserver | null = null;
+
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(handleResize);
+      resizeObserver.observe(container);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
     const chart = chartRef.current;
@@ -131,5 +178,15 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
     updateArgs[2]
   ]);
 
-  return <div {...containerProps} ref={containerRef} />;
+  return (
+    <div
+      {...containerProps}
+      ref={containerRef}
+      style={{
+        width: '100%',
+        minWidth: 0,
+        ...containerProps?.style
+      }}
+    />
+  );
 });

@@ -274,6 +274,25 @@ pre.code {
 }
 
 .chart-host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.chart-host,
+.chart-host > div,
+.chart-host .highcharts-container,
+.chart-host .highcharts-root,
+.chart-host svg {
+  max-width: 100% !important;
+}
+
+.chart-host > div,
+.chart-host .highcharts-container {
+  width: 100% !important;
+}
+
+.chart-host {
   min-height: 300px;
 }
 
@@ -444,9 +463,19 @@ button.small {
     grid-template-columns: 1fr;
   }
 
+  .layout {
+    gap: 18px;
+  }
+
+  .panels,
   .log-panel {
+    min-width: 0;
+  }
+
+  .log-panel {
+    order: 2;
     position: static;
-    max-height: 360px;
+    max-height: min(360px, 50vh);
   }
 }
 
@@ -457,6 +486,15 @@ button.small {
 
   .demo-card.full {
     grid-column: auto;
+  }
+
+  .chart-frame {
+    padding: 4px;
+    min-height: 240px;
+  }
+
+  .chart-host {
+    min-height: 240px;
   }
 
   h1 {
@@ -478,5 +516,10 @@ button.small {
   .log-panel {
     padding: 16px;
     border-radius: 16px;
+  }
+
+  .chart-frame,
+  .chart-host {
+    min-height: 220px;
   }
 }

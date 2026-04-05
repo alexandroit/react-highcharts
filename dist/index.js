@@ -25,6 +25,7 @@ var Chart = forwardRef(function Chart2({
   const chartRef = useRef(null);
   const skipNextUpdateRef = useRef(true);
   const onReadyRef = useRef(onChartReady);
+  const frameRef = useRef(null);
   onReadyRef.current = onChartReady;
   useImperativeHandle(
     ref,
@@ -35,6 +36,10 @@ var Chart = forwardRef(function Chart2({
     []
   );
   function destroyChart() {
+    if (frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    }
     chartRef.current?.destroy();
     chartRef.current = null;
   }
@@ -54,12 +59,44 @@ var Chart = forwardRef(function Chart2({
     });
     skipNextUpdateRef.current = true;
   }
+  function scheduleReflow() {
+    if (frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+    }
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = null;
+      chartRef.current?.reflow();
+    });
+  }
   useIsomorphicLayoutEffect(() => {
     createChart();
     return () => {
       destroyChart();
     };
   }, [highcharts, constructorType]);
+  useIsomorphicLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+    const handleResize = () => {
+      scheduleReflow();
+    };
+    let resizeObserver = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(handleResize);
+      resizeObserver.observe(container);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => {
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useIsomorphicLayoutEffect(() => {
     const chart = chartRef.current;
     if (!chart) {
@@ -85,7 +122,18 @@ var Chart = forwardRef(function Chart2({
     updateArgs[1],
     updateArgs[2]
   ]);
-  return /* @__PURE__ */ jsx("div", { ...containerProps, ref: containerRef });
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      ...containerProps,
+      ref: containerRef,
+      style: {
+        width: "100%",
+        minWidth: 0,
+        ...containerProps?.style
+      }
+    }
+  );
 });
 
 // src/modules.ts

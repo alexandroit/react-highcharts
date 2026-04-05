@@ -49,6 +49,7 @@ var Chart = (0, import_react2.forwardRef)(function Chart2({
   const chartRef = (0, import_react2.useRef)(null);
   const skipNextUpdateRef = (0, import_react2.useRef)(true);
   const onReadyRef = (0, import_react2.useRef)(onChartReady);
+  const frameRef = (0, import_react2.useRef)(null);
   onReadyRef.current = onChartReady;
   (0, import_react2.useImperativeHandle)(
     ref,
@@ -59,6 +60,10 @@ var Chart = (0, import_react2.forwardRef)(function Chart2({
     []
   );
   function destroyChart() {
+    if (frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+      frameRef.current = null;
+    }
     chartRef.current?.destroy();
     chartRef.current = null;
   }
@@ -78,12 +83,44 @@ var Chart = (0, import_react2.forwardRef)(function Chart2({
     });
     skipNextUpdateRef.current = true;
   }
+  function scheduleReflow() {
+    if (frameRef.current !== null) {
+      cancelAnimationFrame(frameRef.current);
+    }
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = null;
+      chartRef.current?.reflow();
+    });
+  }
   useIsomorphicLayoutEffect(() => {
     createChart();
     return () => {
       destroyChart();
     };
   }, [highcharts, constructorType]);
+  useIsomorphicLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+    const handleResize = () => {
+      scheduleReflow();
+    };
+    let resizeObserver = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(handleResize);
+      resizeObserver.observe(container);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => {
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   useIsomorphicLayoutEffect(() => {
     const chart = chartRef.current;
     if (!chart) {
@@ -109,7 +146,18 @@ var Chart = (0, import_react2.forwardRef)(function Chart2({
     updateArgs[1],
     updateArgs[2]
   ]);
-  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { ...containerProps, ref: containerRef });
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
+    "div",
+    {
+      ...containerProps,
+      ref: containerRef,
+      style: {
+        width: "100%",
+        minWidth: 0,
+        ...containerProps?.style
+      }
+    }
+  );
 });
 
 // src/modules.ts
