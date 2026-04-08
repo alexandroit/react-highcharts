@@ -1,0 +1,18 @@
+{
+  "packageName": "@stackline/react-highcharts",
+  "projectRoot": "react-highcharts/react-highcharts",
+  "framework": "react",
+  "family": "react-17",
+  "major": 17,
+  "exactVersion": "17.0.1",
+  "installMode": "npm-install",
+  "localInstallSource": "../../..",
+  "expectedExports": [
+    "Chart",
+    "initHighchartsModules"
+  ],
+  "installCommand": "npm install --ignore-scripts",
+  "validateCommand": "npm run validate",
+  "buildCommand": "npm run build",
+  "generatedAt": "2026-04-08T22:13:17.305Z"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@stackline/react-highcharts-docs-react19-19-1-5",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "validate": "node ./stackline-validate.mjs"
+  },
+  "dependencies": {
+    "highcharts": "12.5.0",
+    "react": "19.1.5",
+    "react-dom": "19.1.5",
+    "@stackline/react-highcharts": "file:../../.."
+  },
+  "devDependencies": {}
+}

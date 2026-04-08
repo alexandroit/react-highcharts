@@ -5,15 +5,15 @@ import {
   exposeHighchartsGlobals,
   initHighchartsModules,
   type ChartHandle
-} from '@revivejs/react-highcharts';
+} from '@stackline/react-highcharts';
 
 Highcharts.setOptions({
   colors: ['#0d5c9e', '#30a46c', '#d26a2a', '#b43f3f', '#6d52b5']
 });
 
-const INSTALL_CODE = `npm install @revivejs/react-highcharts highcharts`;
+const INSTALL_CODE = `npm install @stackline/react-highcharts@17 highcharts`;
 
-const SETUP_CODE = `import Highcharts from 'highcharts';\nimport { Chart } from '@revivejs/react-highcharts';\n\n<Chart highcharts={Highcharts} options={myOptions} />`;
+const SETUP_CODE = `import Highcharts from 'highcharts';\nimport { Chart } from '@stackline/react-highcharts';\n\n<Chart highcharts={Highcharts} options={myOptions} />`;
 
 const STOCK_CODE = `import Highstock from 'highcharts/highstock';\n\n<Chart\n  highcharts={Highstock}\n  constructorType="stockChart"\n  options={stockOptions}\n/>`;
 
@@ -37,7 +37,7 @@ const OPTIONAL_MODULE_LOADERS = [
   { name: 'highcharts/modules/renko.js', load: () => import('highcharts/modules/renko.js') }
 ] as const;
 
-const MODULE_CODE = `import Highcharts from 'highcharts/highstock';\nimport {\n  exposeHighchartsGlobals,\n  initHighchartsModules\n} from '@revivejs/react-highcharts';\n\nconst moduleLoaders = [\n  () => import('highcharts/highcharts-3d.js'),\n  () => import('highcharts/modules/heatmap.js'),\n  () => import('highcharts/modules/bullet.js'),\n  () => import('highcharts/modules/xrange.js'),\n  () => import('highcharts/modules/sankey.js'),\n  () => import('highcharts/modules/organization.js'),\n  () => import('highcharts/modules/dependency-wheel.js'),\n  () => import('highcharts/modules/venn.js'),\n  () => import('highcharts/modules/timeline.js'),\n  () => import('highcharts/modules/marker-clusters.js'),\n  () => import('highcharts/modules/annotations.js'),\n  () => import('highcharts/modules/drilldown.js'),\n  () => import('highcharts/modules/arc-diagram.js'),\n  () => import('highcharts/modules/treemap.js'),\n  () => import('highcharts/modules/treegraph.js'),\n  () => import('highcharts/modules/pointandfigure.js'),\n  () => import('highcharts/modules/renko.js')\n];\n\nexposeHighchartsGlobals(Highcharts);\n\nconst modules = [];\nfor (const load of moduleLoaders) {\n  modules.push(await load());\n}\n\ninitHighchartsModules(Highcharts, ...modules);`;
+const MODULE_CODE = `import Highcharts from 'highcharts/highstock';\nimport {\n  exposeHighchartsGlobals,\n  initHighchartsModules\n} from '@stackline/react-highcharts';\n\nconst moduleLoaders = [\n  () => import('highcharts/highcharts-3d.js'),\n  () => import('highcharts/modules/heatmap.js'),\n  () => import('highcharts/modules/bullet.js'),\n  () => import('highcharts/modules/xrange.js'),\n  () => import('highcharts/modules/sankey.js'),\n  () => import('highcharts/modules/organization.js'),\n  () => import('highcharts/modules/dependency-wheel.js'),\n  () => import('highcharts/modules/venn.js'),\n  () => import('highcharts/modules/timeline.js'),\n  () => import('highcharts/modules/marker-clusters.js'),\n  () => import('highcharts/modules/annotations.js'),\n  () => import('highcharts/modules/drilldown.js'),\n  () => import('highcharts/modules/arc-diagram.js'),\n  () => import('highcharts/modules/treemap.js'),\n  () => import('highcharts/modules/treegraph.js'),\n  () => import('highcharts/modules/pointandfigure.js'),\n  () => import('highcharts/modules/renko.js')\n];\n\nexposeHighchartsGlobals(Highcharts);\n\nconst modules = [];\nfor (const load of moduleLoaders) {\n  modules.push(await load());\n}\n\ninitHighchartsModules(Highcharts, ...modules);`;
 
 const EVENT_CODE = `const eventChartRef = useRef<ChartHandle>(null);\n\nconst eventOptions = {\n  chart: {\n    zoomType: 'xy',\n    events: {\n      selection(event) {\n        const axis = event.xAxis?.[0];\n        if (axis) {\n          pushLog(\`Selection: \${axis.min?.toFixed(2)} to \${axis.max?.toFixed(2)}\`);\n        }\n      }\n    }\n  },\n  xAxis: {\n    events: {\n      afterSetExtremes(event) {\n        pushLog(\`X extremes: \${event.min} to \${event.max}\`);\n      }\n    }\n  }\n};`;
 
@@ -1247,7 +1247,7 @@ export function App({ reactLine }: AppProps) {
       <section className="hero">
         <div className="hero-card hero-main">
           <span className="badge">React {reactLine} · Highcharts 12</span>
-          <h1>@revivejs/react-highcharts</h1>
+          <h1>@stackline/react-highcharts</h1>
           <p>
             A thin, community-style React wrapper for Highcharts, StockChart, 3D charts, heatmaps,
             drilldowns, renko charts and point-and-figure series. Pass the Highcharts instance,
@@ -1682,7 +1682,7 @@ export function App({ reactLine }: AppProps) {
 
       <footer className="footer">
         <p>
-          <strong>@revivejs/react-highcharts</strong> keeps the wrapper intentionally thin so React stays in charge
+          <strong>@stackline/react-highcharts</strong> keeps the wrapper intentionally thin so React stays in charge
           of state while Highcharts stays in charge of rendering, interactivity, and advanced chart types.
         </p>
       </footer>

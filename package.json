@@ -1,5 +1,5 @@
 {
-  "name": "@revivejs/react-highcharts",
+  "name": "@stackline/react-highcharts",
   "version": "19.0.1",
   "description": "A thin React 19 wrapper for Highcharts with versioned demos.",
   "keywords": [
@@ -58,8 +58,8 @@
   },
   "peerDependencies": {
     "highcharts": ">=12.5.0",
-    "react": ">=17.0.0 <20.0.0",
-    "react-dom": ">=17.0.0 <20.0.0"
+    "react": ">=19.0.0 <20.0.0",
+    "react-dom": ">=19.0.0 <20.0.0"
   },
   "devDependencies": {
     "@types/react": "19.2.14",
