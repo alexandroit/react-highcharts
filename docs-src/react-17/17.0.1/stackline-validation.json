@@ -1,0 +1,19 @@
+{
+  "packageName": "@stackline/react-highcharts",
+  "projectRoot": "react-highcharts/react-highcharts",
+  "family": "react-17",
+  "framework": "react",
+  "exactVersion": "17.0.1",
+  "releaseRoot": "react-highcharts/react-highcharts/docs-src/react-17/17.0.1",
+  "build": null,
+  "install": {
+    "success": true,
+    "command": "npm install --ignore-scripts"
+  },
+  "validate": {
+    "success": true,
+    "command": "npm run validate"
+  },
+  "success": true,
+  "generatedAt": "2026-04-09T01:54:40.516Z"
+}

@@ -188,4 +188,3 @@ function initHighchartsModules(highcharts, ...modules) {
   exposeHighchartsGlobals,
   initHighchartsModules
 });
-//# sourceMappingURL=index.cjs.map
