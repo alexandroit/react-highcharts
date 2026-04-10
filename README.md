@@ -10,7 +10,7 @@
 
 **[Documentation & Live Demos](https://alexandroit.github.io/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
 
-**Latest version:** `19.0.1`
+**Latest version:** `19.0.0`
 
 ## Why this library?
 
@@ -143,14 +143,12 @@ export function ControlledChart() {
 
 ## Changelog
 
-### 19.0.1
-- Improved responsive chart behavior in the published wrapper by reflowing on container resize
-- Updated the React 17, 18, and 19 docs so charts and the event log stack cleanly across mobile and desktop layouts
-
 ### 19.0.0
 - Updated the library line for React 19.2
 - Added the `react-19` demo app and made it the latest docs line
 - Kept the wrapper API aligned with the React 17 and 18 lines
+- Improved responsive chart behavior in the published wrapper by reflowing on container resize
+- Updated the React 17, 18, and 19 docs so charts and the event log stack cleanly across mobile and desktop layouts
 
 ### 18.0.0
 - Updated the library line for React 18.3

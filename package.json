@@ -1,6 +1,6 @@
 {
   "name": "@stackline/react-highcharts",
-  "version": "19.0.1",
+  "version": "19.0.0",
   "description": "A thin React 19 wrapper for Highcharts with versioned demos.",
   "keywords": [
     "react",
@@ -15,7 +15,7 @@
     "3d-chart",
     "wrapper",
     "ui-component",
-    "revived",
+    "maintained",
     "maintained"
   ],
   "homepage": "https://alexandroit.github.io/react-highcharts/",
