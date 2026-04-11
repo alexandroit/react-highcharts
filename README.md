@@ -8,7 +8,7 @@
 [![React 19](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)](https://react.dev)
 [![Highcharts](https://img.shields.io/badge/Highcharts-12.5-navy?style=flat-square)](https://www.highcharts.com)
 
-**[Documentation & Live Demos](https://alexandroit.github.io/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
+**[Documentation & Live Demos](https://alexandro.net/docs/react/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
 
 **Latest version:** `19.0.0`
 
@@ -29,9 +29,9 @@ Each package family only installs on its matching React family. Framework major 
 
 | Package family | Framework family | Peer range | Tested release window | Demo link |
 | :---: | :---: | :---: | :---: | :--- |
-| **19.x** | **React 19 only** | **`>=19.0.0 <20.0.0`** | **19.0.0 -> 19.2.5** | [React 19 family docs](https://alexandroit.github.io/react-highcharts/react-19/) |
-| **18.x** | **React 18 only** | **`>=18.0.0 <19.0.0`** | **18.0.0 -> 18.3.1** | [React 18 family docs](https://alexandroit.github.io/react-highcharts/react-18/) |
-| **17.x** | **React 17 only** | **`>=17.0.0 <18.0.0`** | **17.0.0 -> 17.0.2** | [React 17 family docs](https://alexandroit.github.io/react-highcharts/react-17/) |
+| **19.x** | **React 19 only** | **`>=19.0.0 <20.0.0`** | **19.0.0 -> 19.2.5** | [React 19 family docs](https://alexandro.net/docs/react/react-highcharts/react-19/) |
+| **18.x** | **React 18 only** | **`>=18.0.0 <19.0.0`** | **18.0.0 -> 18.3.1** | [React 18 family docs](https://alexandro.net/docs/react/react-highcharts/react-18/) |
+| **17.x** | **React 17 only** | **`>=17.0.0 <18.0.0`** | **17.0.0 -> 17.0.2** | [React 17 family docs](https://alexandro.net/docs/react/react-highcharts/react-17/) |
 
 
 ## Installation
