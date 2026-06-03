@@ -4,18 +4,20 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const repoRoot = path.resolve(__dirname, "..");
-const htmlFiles = ["docs-src/react-19/index.html"];
-const themeFiles = ["docs-src/react-19/src/app.css"];
+const htmlFiles = ["docs-src/react-17/index.html"];
+const themeFiles = ["docs-src/react-17/src/app.css"];
 const expectedStrings = ["@stackline/react-highcharts"];
-const themeMarker = /stackline-docs-(refresh|wrap-fix|mobile-title-fix|mobile-layout-fix)-2026/;
+const themeMarker = /React 17 compatibility layer over the Angular 21 Highcharts shell/;
 
 for (const relativePath of htmlFiles) {
   test(`html smoke: ${relativePath}`, () => {
     const filePath = path.join(repoRoot, relativePath);
     const html = fs.readFileSync(filePath, "utf8");
     assert.match(html, /meta name="viewport"/i);
-    assert.match(html, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/);
-    assert.match(html, /googletagmanager\.com\/gtag\/js\?id=G-3KQ9KECXR9/);
+    assert.match(html, /<div id="root"><\/div>/i);
+    assert.match(html, /\/src\/main\.tsx/i);
+    assert.doesNotMatch(html, /pagead2\.googlesyndication\.com/i);
+    assert.doesNotMatch(html, /googletagmanager\.com/i);
     for (const expected of expectedStrings) {
       assert.equal(html.includes(expected), true);
     }

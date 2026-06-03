@@ -14,6 +14,7 @@ interface ChartProps {
     onChartReady?: (chart: Highcharts.Chart) => void;
     allowChartUpdate?: boolean;
     immutable?: boolean;
+    updateMode?: 'options' | 'series-data';
     updateArgs?: [
         redraw?: boolean,
         oneToOne?: boolean,

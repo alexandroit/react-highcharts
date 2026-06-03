@@ -1,7 +1,7 @@
 {
   "name": "@stackline/react-highcharts",
-  "version": "19.0.0",
-  "description": "A thin React 19 wrapper for Highcharts with versioned demos.",
+  "version": "17.0.0",
+  "description": "A maintained React 17 wrapper for Highcharts, Highstock, and Highmaps with native options, constructor switching, module helpers, refs, and realtime update modes.",
   "keywords": [
     "react",
     "react-library",
@@ -10,12 +10,20 @@
     "charts",
     "react-highcharts",
     "highcharts-react",
+    "highcharts-wrapper",
+    "react-charts",
+    "highstock",
+    "highmaps",
     "stock-chart",
+    "candlestick",
+    "realtime-charts",
+    "dynamic-charts",
     "heatmap",
+    "treemap",
     "3d-chart",
+    "chart-wrapper",
     "wrapper",
     "ui-component",
-    "maintained",
     "maintained"
   ],
   "homepage": "https://alexandro.net/docs/react/react-highcharts/",
@@ -24,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexandroit/react-highcharts.git"
+    "url": "git+https://github.com/alexandroit/react-highcharts.git"
   },
   "license": "MIT",
   "type": "module",
@@ -53,21 +61,21 @@
     "build:docs:react-17": "cd docs-src/react-17 && npm run build",
     "build:docs:react-18": "cd docs-src/react-18 && npm run build",
     "build:docs:react-19": "cd docs-src/react-19 && npm run build",
-    "build:docs": "npm run build:docs:react-19",
+    "build:docs": "npm run build:docs:react-17",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.cjs"
   },
   "peerDependencies": {
-    "highcharts": ">=12.5.0",
-    "react": ">=19.0.0 <20.0.0",
-    "react-dom": ">=19.0.0 <20.0.0"
+    "highcharts": ">=6.0.0 <=12.6.0",
+    "react": ">=17.0.0 <18.0.0",
+    "react-dom": ">=17.0.0 <18.0.0"
   },
   "devDependencies": {
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
-    "highcharts": "12.5.0",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "@types/react": "17.0.91",
+    "@types/react-dom": "17.0.26",
+    "highcharts": "12.6.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "tsup": "8.5.1",
     "typescript": "5.9.3"
   }

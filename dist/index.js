@@ -11,6 +11,61 @@ var useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect 
 
 // src/Chart.tsx
 import { jsx } from "react/jsx-runtime";
+function sanitizeChartDom(chart) {
+  const container = chart?.container;
+  if (!container?.querySelectorAll) {
+    return;
+  }
+  container.querySelectorAll('[visibility="NaN"]').forEach((element) => {
+    element.removeAttribute("visibility");
+  });
+}
+function asArray(value) {
+  if (!value) {
+    return [];
+  }
+  return Array.isArray(value) ? value : [value];
+}
+function updateAxes(axes, nextOptions) {
+  const options = asArray(nextOptions);
+  axes?.forEach((axis, index) => {
+    const axisOptions = options[index];
+    if (axisOptions) {
+      axis.update(axisOptions, false);
+    }
+  });
+}
+function updateSeriesData(chart, options) {
+  const nextSeries = asArray(options.series);
+  if (!nextSeries.length || nextSeries.length !== chart.series.length) {
+    return false;
+  }
+  for (let index = 0; index < nextSeries.length; index += 1) {
+    const series = chart.series[index];
+    const seriesOptions = nextSeries[index];
+    const nextType = "type" in seriesOptions ? seriesOptions.type : void 0;
+    if (nextType && series.type !== nextType) {
+      return false;
+    }
+    if (!("data" in seriesOptions)) {
+      return false;
+    }
+  }
+  chart.setTitle(options.title, options.subtitle, false);
+  updateAxes(chart.xAxis, options.xAxis);
+  updateAxes(chart.yAxis, options.yAxis);
+  updateAxes(chart.colorAxis, options.colorAxis);
+  nextSeries.forEach((seriesOptions, index) => {
+    chart.series[index].setData(
+      seriesOptions.data || [],
+      false,
+      false,
+      false
+    );
+  });
+  chart.redraw(false);
+  return true;
+}
 var Chart = forwardRef(function Chart2({
   highcharts,
   options,
@@ -18,6 +73,7 @@ var Chart = forwardRef(function Chart2({
   onChartReady,
   allowChartUpdate = true,
   immutable = false,
+  updateMode = "options",
   updateArgs = [true, true, true],
   containerProps
 }, ref) {
@@ -55,9 +111,12 @@ var Chart = forwardRef(function Chart2({
     }
     destroyChart();
     chartRef.current = factory(containerRef.current, options, (chart) => {
+      sanitizeChartDom(chart);
       onReadyRef.current?.(chart);
     });
+    sanitizeChartDom(chartRef.current);
     skipNextUpdateRef.current = true;
+    scheduleReflow();
   }
   function scheduleReflow() {
     if (frameRef.current !== null) {
@@ -66,6 +125,7 @@ var Chart = forwardRef(function Chart2({
     frameRef.current = requestAnimationFrame(() => {
       frameRef.current = null;
       chartRef.current?.reflow();
+      sanitizeChartDom(chartRef.current);
     });
   }
   useIsomorphicLayoutEffect(() => {
@@ -113,11 +173,17 @@ var Chart = forwardRef(function Chart2({
     if (!allowChartUpdate) {
       return;
     }
+    if (updateMode === "series-data" && updateSeriesData(chart, options)) {
+      sanitizeChartDom(chart);
+      return;
+    }
     chart.update(options, updateArgs[0], updateArgs[1], updateArgs[2]);
+    sanitizeChartDom(chart);
   }, [
     options,
     allowChartUpdate,
     immutable,
+    updateMode,
     updateArgs[0],
     updateArgs[1],
     updateArgs[2]

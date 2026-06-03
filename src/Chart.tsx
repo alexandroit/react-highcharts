@@ -21,12 +21,87 @@ export interface ChartProps {
   onChartReady?: (chart: Highcharts.Chart) => void;
   allowChartUpdate?: boolean;
   immutable?: boolean;
+  updateMode?: 'options' | 'series-data';
   updateArgs?: [
     redraw?: boolean,
     oneToOne?: boolean,
     animation?: boolean | Partial<Highcharts.AnimationOptionsObject>
   ];
   containerProps?: HTMLAttributes<HTMLDivElement>;
+}
+
+function sanitizeChartDom(chart: Highcharts.Chart | null) {
+  const container = chart?.container;
+
+  if (!container?.querySelectorAll) {
+    return;
+  }
+
+  container.querySelectorAll('[visibility="NaN"]').forEach((element) => {
+    element.removeAttribute('visibility');
+  });
+}
+
+function asArray<T>(value: T | T[] | undefined): T[] {
+  if (!value) {
+    return [];
+  }
+
+  return Array.isArray(value) ? value : [value];
+}
+
+function updateAxes(
+  axes: Highcharts.Axis[] | undefined,
+  nextOptions: Highcharts.XAxisOptions | Highcharts.XAxisOptions[] | Highcharts.YAxisOptions | Highcharts.YAxisOptions[] | undefined
+) {
+  const options = asArray(nextOptions);
+
+  axes?.forEach((axis, index) => {
+    const axisOptions = options[index];
+
+    if (axisOptions) {
+      axis.update(axisOptions as Highcharts.AxisOptions, false);
+    }
+  });
+}
+
+function updateSeriesData(chart: Highcharts.Chart, options: Highcharts.Options) {
+  const nextSeries = asArray(options.series as Highcharts.SeriesOptionsType[] | undefined);
+
+  if (!nextSeries.length || nextSeries.length !== chart.series.length) {
+    return false;
+  }
+
+  for (let index = 0; index < nextSeries.length; index += 1) {
+    const series = chart.series[index];
+    const seriesOptions = nextSeries[index] as Highcharts.SeriesOptionsType & { data?: unknown[] };
+    const nextType = 'type' in seriesOptions ? seriesOptions.type : undefined;
+
+    if (nextType && series.type !== nextType) {
+      return false;
+    }
+
+    if (!('data' in seriesOptions)) {
+      return false;
+    }
+  }
+
+  chart.setTitle(options.title, options.subtitle, false);
+  updateAxes(chart.xAxis, options.xAxis);
+  updateAxes(chart.yAxis, options.yAxis);
+  updateAxes((chart as unknown as { colorAxis?: Highcharts.Axis[] }).colorAxis, options.colorAxis as Highcharts.YAxisOptions | Highcharts.YAxisOptions[] | undefined);
+
+  nextSeries.forEach((seriesOptions, index) => {
+    chart.series[index].setData(
+      ((seriesOptions as Highcharts.SeriesOptionsType & { data?: unknown[] }).data || []) as never[],
+      false,
+      false,
+      false
+    );
+  });
+
+  chart.redraw(false);
+  return true;
 }
 
 export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
@@ -37,6 +112,7 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
     onChartReady,
     allowChartUpdate = true,
     immutable = false,
+    updateMode = 'options',
     updateArgs = [true, true, true],
     containerProps
   },
@@ -91,10 +167,13 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
         callback?: (chart: Highcharts.Chart) => void
       ) => Highcharts.Chart
     )(containerRef.current, options, (chart) => {
+      sanitizeChartDom(chart);
       onReadyRef.current?.(chart);
     });
 
+    sanitizeChartDom(chartRef.current);
     skipNextUpdateRef.current = true;
+    scheduleReflow();
   }
 
   function scheduleReflow() {
@@ -105,6 +184,7 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
     frameRef.current = requestAnimationFrame(() => {
       frameRef.current = null;
       chartRef.current?.reflow();
+      sanitizeChartDom(chartRef.current);
     });
   }
 
@@ -168,11 +248,18 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
       return;
     }
 
+    if (updateMode === 'series-data' && updateSeriesData(chart, options)) {
+      sanitizeChartDom(chart);
+      return;
+    }
+
     chart.update(options, updateArgs[0], updateArgs[1], updateArgs[2]);
+    sanitizeChartDom(chart);
   }, [
     options,
     allowChartUpdate,
     immutable,
+    updateMode,
     updateArgs[0],
     updateArgs[1],
     updateArgs[2]

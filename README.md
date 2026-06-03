@@ -1,61 +1,129 @@
 # @stackline/react-highcharts
 
-> A maintained **React 19 wrapper for Highcharts** with a thin component API, imperative ref access, `stockChart` support, and versioned live demos.
+> A maintained React 17 wrapper for Highcharts, Highstock, and Highmaps applications, with standard chart rendering, constructor switching, module registration helpers, native chart instance access, resize-aware rendering, controlled update modes, and versioned live demos.
 
 [![npm version](https://img.shields.io/npm/v/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
-[![npm downloads](https://img.shields.io/npm/dt/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
+[![npm monthly](https://img.shields.io/npm/dm/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
 [![license](https://img.shields.io/npm/l/@stackline/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts/blob/master/LICENSE)
-[![React 19](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)](https://react.dev)
-[![Highcharts](https://img.shields.io/badge/Highcharts-12.5-navy?style=flat-square)](https://www.highcharts.com)
+[![React 17](https://img.shields.io/badge/React-17.x-61dafb?style=flat-square&logo=react&logoColor=111111)](https://react.dev/)
+[![Highcharts](https://img.shields.io/badge/Highcharts-6%2B-2f7ed8?style=flat-square)](https://www.highcharts.com/)
+[![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
 
-**[Documentation & Live Demos](https://alexandro.net/docs/react/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
+**[Documentation & Live Demos](https://alexandro.net/docs/react/react-highcharts/)** | **[React 17 Demo](https://alexandro.net/docs/react/react-highcharts/react-17/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)** | **[Community Discussions](https://www.reddit.com/r/Stackline/)**
 
-**Latest version:** `19.0.0`
+<p align="center">
+  <img src="https://alexandro.net/docs/react/react-highcharts/react-17/assets/react-highcharts-live.png" alt="Stackline React Highcharts live examples" width="920">
+</p>
+
+**React 17 release:** `17.0.0`
+
+---
+
+> **Credits:** Stackline React Highcharts is maintained by [Alexandro Paixao Marques](https://github.com/alexandroit/react-highcharts). The package keeps the wrapper intentionally thin so React applications can use the native Highcharts API directly instead of learning a second chart abstraction.
+
+---
 
 ## Why this library?
 
-`@stackline/react-highcharts` is intentionally thin. It follows the common React + Highcharts pattern:
+`@stackline/react-highcharts` gives React 17 applications a small, predictable bridge to Highcharts.
 
-- pass a `highcharts` instance
-- pass a single `options` object
-- choose the constructor with `constructorType`
-- access the live chart through a ref when you need imperative updates
+The goal is not to hide Highcharts. Your application still owns the real Highcharts options object, the Highcharts instance, module registration, constructor choice, event callbacks, and native chart instance. The wrapper gives React a stable `<Chart>` component, typed props, ref access, resize-aware rendering, SSR-safe effects, module helper utilities, and update modes that avoid unnecessary full chart recreation.
 
-That makes it easy to keep React in charge of composition while still using the full Highcharts API.
+The React 17 package family is `17.0.0` and is intended for React `17.x` applications. The validation app for this line uses a real React 17 project, renders static chart examples, renders realtime market examples, and validates that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
+
+## Features
+
+| Feature | Supported |
+| :--- | :---: |
+| React 17 tested release line | ✅ |
+| Standard `Highcharts.Chart` rendering | ✅ |
+| `stockChart` constructor support | ✅ |
+| `mapChart` and `ganttChart` constructor names | ✅ |
+| Native Highcharts options object | ✅ |
+| Native chart instance access through React refs | ✅ |
+| `onChartReady` callback | ✅ |
+| Highcharts module registration helpers | ✅ |
+| Duplicate module registration guard | ✅ |
+| ResizeObserver reflow support | ✅ |
+| Window resize reflow fallback | ✅ |
+| Controlled `chart.update(...)` arguments | ✅ |
+| Immutable recreation mode | ✅ |
+| Series-data update mode for realtime charts | ✅ |
+| Option callbacks stay native Highcharts callbacks | ✅ |
+| Static examples for common chart types | ✅ |
+| Realtime chart demo coverage | ✅ |
+| Versioned docs builds per React line | ✅ |
+
+## Table of Contents
+
+1. [React Version Compatibility](#react-version-compatibility)
+2. [Installation](#installation)
+3. [Setup](#setup)
+4. [Basic Usage](#basic-usage)
+5. [Constructor Switch](#constructor-switch)
+6. [Highcharts Modules](#highcharts-modules)
+7. [Events](#events)
+8. [Native Chart Instance](#native-chart-instance)
+9. [Dynamic Updates](#dynamic-updates)
+10. [Common Chart Types](#common-chart-types)
+11. [API Surface](#api-surface)
+12. [Wrapper Capabilities](#wrapper-capabilities)
+13. [License](#license)
 
 ## React Version Compatibility
 
-Each package family only installs on its matching React family. Framework major and package major are not always the same package number, so use the package family column below.
+Each package family targets one React major. Keep the package major aligned with the React major used by your application.
 
-| Package family | Framework family | Peer range | Tested release window | Demo link |
-| :---: | :---: | :---: | :---: | :--- |
-| **19.x** | **React 19 only** | **`>=19.0.0 <20.0.0`** | **19.0.0 -> 19.2.5** | [React 19 family docs](https://alexandro.net/docs/react/react-highcharts/react-19/) |
-| **18.x** | **React 18 only** | **`>=18.0.0 <19.0.0`** | **18.0.0 -> 18.3.1** | [React 18 family docs](https://alexandro.net/docs/react/react-highcharts/react-18/) |
-| **17.x** | **React 17 only** | **`>=17.0.0 <18.0.0`** | **17.0.0 -> 17.0.2** | [React 17 family docs](https://alexandro.net/docs/react/react-highcharts/react-17/) |
+| Package family | React family | Peer range | Install |
+| :---: | :---: | :---: | :--- |
+| `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | `npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact` |
 
+React 18 and React 19 package families will be released separately so each line can be tested with the matching React runtime and project template.
 
 ## Installation
 
 ```bash
-npm install @stackline/react-highcharts highcharts
+npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact
 ```
 
-Choose the package family from the compatibility table above. Each published family is locked to one framework major only.
+The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
+
+## Highcharts Compatibility
+
+The React 17 validation app uses `highcharts@12.6.0`, which is the highest Highcharts version tested for this line.
+
+The maintained Stackline React 17 line is published with a Highcharts peer range of `>=6.0.0 <=12.6.0` so applications get a clear, reproducible compatibility ceiling while still keeping Highcharts as an application-owned peer dependency.
+
+## Setup
+
+### 1. Import Highcharts and the wrapper
+
+```tsx
+import Highcharts from 'highcharts';
+import { Chart } from '@stackline/react-highcharts';
+```
+
+### 2. Render the wrapper with native Highcharts options
+
+```tsx
+<Chart highcharts={Highcharts} options={options} />
+```
 
 ## Basic Usage
+
+### 1. Render a chart
 
 ```tsx
 import Highcharts from 'highcharts';
 import { Chart } from '@stackline/react-highcharts';
 
 const options: Highcharts.Options = {
-  title: { text: 'Quarterly revenue' },
+  chart: { type: 'line' },
+  title: { text: 'Simple chart' },
+  xAxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr'] },
+  yAxis: { title: { text: 'Revenue' } },
   series: [
-    {
-      type: 'line',
-      name: 'Revenue',
-      data: [14, 18, 22, 28]
-    }
+    { type: 'line', name: 'Orders', data: [29.9, 71.5, 106.4, 129.2] }
   ]
 };
 
@@ -64,29 +132,52 @@ export function RevenueChart() {
 }
 ```
 
-## StockChart
+## Constructor Switch
+
+Use `constructorType` when the chart should be created with another Highcharts constructor.
 
 ```tsx
 import Highcharts from 'highcharts/highstock';
 import { Chart } from '@stackline/react-highcharts';
 
-export function PriceChart() {
+const stockOptions: Highcharts.Options = {
+  rangeSelector: { selected: 1 },
+  title: { text: 'BNBUSDT candles' },
+  series: [
+    {
+      type: 'candlestick',
+      name: 'BNBUSDT',
+      data: []
+    }
+  ]
+};
+
+export function CandleChart() {
   return (
     <Chart
       highcharts={Highcharts}
       constructorType="stockChart"
-      options={{
-        series: [{ type: 'line', data: [101, 104, 109, 111] }]
-      }}
+      options={stockOptions}
     />
   );
 }
 ```
 
-## Modules
+Common constructor values:
+
+| Constructor | Usage |
+| :--- | :--- |
+| `chart` | Default Highcharts charts. |
+| `stockChart` | Highstock timelines, candlesticks, ranges, and financial charts. |
+| `mapChart` | Highmaps-style charts when the matching Highcharts build is registered. |
+| `ganttChart` | Gantt-style charts when the matching Highcharts build is registered. |
+
+## Highcharts Modules
+
+Register Highcharts modules once at application startup. The helper accepts both direct module factories and ESM default exports.
 
 ```tsx
-import Highcharts from 'highcharts';
+import Highcharts from 'highcharts/highstock';
 import {
   Chart,
   exposeHighchartsGlobals,
@@ -95,67 +186,186 @@ import {
 
 exposeHighchartsGlobals(Highcharts);
 
-const [{ default: Highcharts3D }, { default: HeatmapModule }] = await Promise.all([
-  import('highcharts/highcharts-3d.js'),
-  import('highcharts/modules/heatmap.js')
+const [moreModule, heatmapModule, treemapModule, solidGaugeModule] = await Promise.all([
+  import('highcharts/highcharts-more.js'),
+  import('highcharts/modules/heatmap.js'),
+  import('highcharts/modules/treemap.js'),
+  import('highcharts/modules/solid-gauge.js')
 ]);
 
-initHighchartsModules(Highcharts, Highcharts3D, HeatmapModule);
+initHighchartsModules(
+  Highcharts,
+  moreModule,
+  heatmapModule,
+  treemapModule,
+  solidGaugeModule
+);
 ```
 
-## Imperative Access
+The live test matrix covers examples for line, spline, area, areaspline, column, bar, stacked column, pie, donut, scatter, bubble, combination, polar, gauge, solid gauge, heatmap, treemap, funnel, 3D column, StockChart, map-like charts, renko, point-and-figure, and no-data states.
+
+## Events
+
+Highcharts event callbacks stay inside the native options object, so existing Highcharts knowledge transfers directly.
+
+```tsx
+const options: Highcharts.Options = {
+  chart: {
+    zoomType: 'xy',
+    events: {
+      selection(event) {
+        console.log('selection', event.xAxis?.[0]);
+      }
+    }
+  },
+  plotOptions: {
+    series: {
+      allowPointSelect: true,
+      events: {
+        mouseOver() {
+          console.log('series hover', this.name);
+        }
+      },
+      point: {
+        events: {
+          select() {
+            console.log('point selected', this.category, this.y);
+          }
+        }
+      }
+    }
+  },
+  series: [{ type: 'column', name: 'Visits', data: [13, 18, 42, 68] }]
+};
+```
+
+## Native Chart Instance
+
+Use a React ref when your application needs the real `Highcharts.Chart` instance.
 
 ```tsx
 import { useRef } from 'react';
 import Highcharts from 'highcharts';
 import { Chart, type ChartHandle } from '@stackline/react-highcharts';
 
-export function ControlledChart() {
+export function ImperativeChart() {
   const chartRef = useRef<ChartHandle>(null);
 
   return (
     <>
       <button
-        onClick={() => {
-          chartRef.current?.chart?.series[0]?.addPoint(42);
-        }}
+        type="button"
+        onClick={() => chartRef.current?.chart?.series[0]?.addPoint(42)}
       >
         Add point
       </button>
-      <Chart ref={chartRef} highcharts={Highcharts} options={{ series: [{ type: 'line', data: [10, 12, 16] }] }} />
+
+      <Chart
+        ref={chartRef}
+        highcharts={Highcharts}
+        options={{
+          title: { text: 'Native instance access' },
+          series: [{ type: 'spline', data: [2, 3, 5, 8, 13] }]
+        }}
+      />
     </>
   );
 }
 ```
 
-## API
+## Dynamic Updates
+
+By default, the wrapper calls `chart.update(options, ...updateArgs)` when the options prop changes.
+
+For realtime data feeds, `updateMode="series-data"` updates existing series data when the chart shape is stable. This avoids full object recreation and reduces visual blinking in live charts.
+
+```tsx
+<Chart
+  highcharts={Highcharts}
+  options={liveOptions}
+  updateMode="series-data"
+  updateArgs={[true, true, false]}
+/>
+```
+
+Use `immutable` when you intentionally want a full chart recreation:
+
+```tsx
+<Chart highcharts={Highcharts} options={options} immutable />
+```
+
+Use `allowChartUpdate={false}` when a chart should be created once and then controlled manually through the native chart instance:
+
+```tsx
+<Chart
+  ref={chartRef}
+  highcharts={Highcharts}
+  options={snapshotOptions}
+  allowChartUpdate={false}
+/>
+```
+
+## Common Chart Types
+
+The wrapper does not limit chart types. If Highcharts supports it and the required module is registered, pass the native options object.
+
+| Chart family | Examples |
+| :--- | :--- |
+| Core charts | line, spline, area, areaspline, column, bar, pie, donut |
+| Analytics charts | scatter, bubble, heatmap, treemap, funnel, solid gauge |
+| Financial charts | StockChart, candlestick, HLC, OHLC, renko, point-and-figure |
+| Advanced modules | 3D column, packed bubble, dependency wheel, network graph, sunburst |
+| Map-like modules | map-style charts when the matching Highcharts map build is registered |
+
+## API Surface
 
 | Prop | Type | Notes |
 | :--- | :--- | :--- |
-| `highcharts` | `typeof Highcharts` | Required. Pass the instance or bundle you want to use. |
+| `highcharts` | `typeof Highcharts` | Required. Pass the Highcharts instance or bundle your application wants to use. |
 | `options` | `Highcharts.Options` | Required. Passed into the selected Highcharts constructor. |
 | `constructorType` | `'chart' \| 'stockChart' \| 'mapChart' \| 'ganttChart'` | Defaults to `'chart'`. |
-| `onChartReady` | `(chart) => void` | Called after the chart is created. |
-| `allowChartUpdate` | `boolean` | Defaults to `true`. |
-| `immutable` | `boolean` | Recreates the chart instead of calling `chart.update`. |
-| `updateArgs` | `[redraw, oneToOne, animation]` | Forwarded to `chart.update`. |
-| `containerProps` | `HTMLAttributes<HTMLDivElement>` | Additional props for the chart container. |
+| `onChartReady` | `(chart: Highcharts.Chart) => void` | Called after the chart is created. |
+| `allowChartUpdate` | `boolean` | Defaults to `true`. Set to `false` for manual native updates. |
+| `immutable` | `boolean` | Recreates the chart instead of calling `chart.update(...)`. |
+| `updateMode` | `'options' \| 'series-data'` | Defaults to `'options'`. Use `'series-data'` for stable realtime series. |
+| `updateArgs` | `[redraw, oneToOne, animation]` | Forwarded to `chart.update(...)` in options mode. |
+| `containerProps` | `React.HTMLAttributes<HTMLDivElement>` | Props and styles for the chart container. |
+
+| Export | Type | Notes |
+| :--- | :--- | :--- |
+| `Chart` | React component | Main wrapper component. |
+| `ChartHandle` | Type | Ref shape with `chart` and `container`. |
+| `ChartProps` | Type | Component prop type. |
+| `ConstructorType` | Type | Supported constructor string union. |
+| `exposeHighchartsGlobals` | Function | Assigns `Highcharts` and `_Highcharts` on `globalThis` for modules that expect globals. |
+| `initHighchartsModules` | Function | Applies Highcharts modules once per Highcharts instance. |
+| `HighchartsModuleFactory` | Type | Accepted module factory shape. |
+
+## Wrapper Capabilities
+
+| Capability | API |
+| :--- | :--- |
+| Options API | `<Chart highcharts={Highcharts} options={options} />` |
+| Constructor switch | `constructorType="stockChart"` |
+| Native ref access | `chartRef.current?.chart` |
+| Controlled updates | `allowChartUpdate`, `immutable`, `updateArgs` |
+| Realtime series updates | `updateMode="series-data"` |
+| Module registration | `initHighchartsModules(Highcharts, ...modules)` |
+| Module globals | `exposeHighchartsGlobals(Highcharts)` |
+| Responsive reflow | `ResizeObserver` plus window resize fallback |
 
 ## Changelog
 
-### 19.0.0
-- Updated the library line for React 19.2
-- Added the `react-19` demo app and made it the latest docs line
-- Kept the wrapper API aligned with the React 17 and 18 lines
-- Improved responsive chart behavior in the published wrapper by reflowing on container resize
-- Updated the React 17, 18, and 19 docs so charts and the event log stack cleanly across mobile and desktop layouts
-
-### 18.0.0
-- Updated the library line for React 18.3
-- Added the `react-18` demo app and made it the latest docs line
-- Switched the demo bootstrap to `createRoot`
-
 ### 17.0.0
-- Initial React wrapper line
-- Added the first versioned docs app for React 17
-- Established the versioned docs structure used by later releases
+
+- Updated the library line for React 17.0.2.
+- Added the React 17 live app with full Highcharts example coverage.
+- Aligned the React live template with the Angular 21 Highcharts documentation style.
+- Updated the demo to use Highcharts 12.6.0 with the latest stable compatible module set.
+- Improved responsive chart behavior by reflowing on container resize.
+- Added `updateMode="series-data"` for live charts that should update existing series instead of recreating the chart.
+- Added a small chart DOM sanitizer for invalid SVG `visibility="NaN"` output from derived Highcharts modules.
+
+## License
+
+MIT
