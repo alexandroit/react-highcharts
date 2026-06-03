@@ -2,8 +2,8 @@
 
 - Framework: react
 - Major family: 19
-- Exact releases: 19
-- Range: 19.0.0 -> 19.2.5
+- Exact releases: 21
+- Range: 19.0.0 -> 19.2.7
 - Validation rule: install the exact framework release with `npm install` inside each release folder.
 
 ## Exact folders
@@ -28,3 +28,5 @@
 - `19.2.4/`
 - `19.2.5/`
 
+- `19.2.6/`
+- `19.2.7/`

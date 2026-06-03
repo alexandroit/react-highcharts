@@ -1,21 +1,21 @@
 # @stackline/react-highcharts
 
-> A maintained React 18 wrapper for Highcharts, Highstock, and Highmaps applications, with standard chart rendering, constructor switching, module registration helpers, native chart instance access, resize-aware rendering, controlled update modes, and versioned live demos.
+> A maintained React 19 wrapper for Highcharts, Highstock, and Highmaps applications, with standard chart rendering, constructor switching, module registration helpers, native chart instance access, resize-aware rendering, controlled update modes, and versioned live demos.
 
 [![npm version](https://img.shields.io/npm/v/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
 [![npm monthly](https://img.shields.io/npm/dm/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
 [![license](https://img.shields.io/npm/l/@stackline/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts/blob/master/LICENSE)
-[![React 18](https://img.shields.io/badge/React-18.x-61dafb?style=flat-square&logo=react&logoColor=111111)](https://react.dev/)
+[![React 19](https://img.shields.io/badge/React-19.x-61dafb?style=flat-square&logo=react&logoColor=111111)](https://react.dev/)
 [![Highcharts](https://img.shields.io/badge/Highcharts-6%2B-2f7ed8?style=flat-square)](https://www.highcharts.com/)
 [![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
 
-**[Documentation & Live Demos](https://alexandro.net/docs/react/react-highcharts/)** | **[React 18 Demo](https://alexandro.net/docs/react/react-highcharts/react-18/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)** | **[Community Discussions](https://www.reddit.com/r/Stackline/)**
+**[Documentation & Live Demos](https://alexandro.net/docs/react/react-highcharts/)** | **[React 19 Demo](https://alexandro.net/docs/react/react-highcharts/react-19/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)** | **[Community Discussions](https://www.reddit.com/r/Stackline/)**
 
 <p align="center">
   <img src="https://assets.alexandro.net/2026/06/react-highcharts-live.png" alt="Stackline React Highcharts live examples" width="920">
 </p>
 
-**React 18 release:** `18.0.0`
+**React 19 release:** `19.0.0`
 
 ---
 
@@ -25,17 +25,17 @@
 
 ## Why this library?
 
-`@stackline/react-highcharts` gives React 18 applications a small, predictable bridge to Highcharts.
+`@stackline/react-highcharts` gives React 19 applications a small, predictable bridge to Highcharts.
 
 The goal is not to hide Highcharts. Your application still owns the real Highcharts options object, the Highcharts instance, module registration, constructor choice, event callbacks, and native chart instance. The wrapper gives React a stable `<Chart>` component, typed props, ref access, resize-aware rendering, SSR-safe effects, module helper utilities, and update modes that avoid unnecessary full chart recreation.
 
-The React 18 package family is `18.0.0` and is intended for React `18.x` applications. The validation app for this line uses a real React 18 project, renders static chart examples, renders realtime market examples, and validates that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
+The React 19 package family is `19.0.0` and is intended for React `19.x` applications. The validation app for this line uses a real React 19 project, renders static chart examples, renders realtime market examples, and validates that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
 
 ## Features
 
 | Feature | Supported |
 | :--- | :---: |
-| React 18 tested release line | ✅ |
+| React 19 tested release line | ✅ |
 | Standard `Highcharts.Chart` rendering | ✅ |
 | `stockChart` constructor support | ✅ |
 | `mapChart` and `ganttChart` constructor names | ✅ |
@@ -76,24 +76,25 @@ Each package family targets one React major. Keep the package major aligned with
 
 | Package family | React family | Peer range | Install |
 | :---: | :---: | :---: | :--- |
+| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.0.0 highcharts@12.6.0 --save-exact` |
 | `18.x` | React `18.x` | `>=18.0.0 <19.0.0` | `npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact` |
 | `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | `npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact` |
 
-React 19 will be released separately so each line can be tested with the matching React runtime and project template.
+Each React major is released separately so every line can be tested with the matching React runtime and project template.
 
 ## Installation
 
 ```bash
-npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact
+npm install @stackline/react-highcharts@19.0.0 highcharts@12.6.0 --save-exact
 ```
 
 The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
 
 ## Highcharts Compatibility
 
-The React 18 validation app uses `highcharts@12.6.0`, which is the highest Highcharts version tested for this line.
+The React 19 validation app uses `highcharts@12.6.0`, which is the highest Highcharts version tested for this line.
 
-The maintained Stackline React 18 line is published with a Highcharts peer range of `>=6.0.0 <=12.6.0` so applications get a clear, reproducible compatibility ceiling while still keeping Highcharts as an application-owned peer dependency.
+The maintained Stackline React 19 line is published with a Highcharts peer range of `>=6.0.0 <=12.6.0` so applications get a clear, reproducible compatibility ceiling while still keeping Highcharts as an application-owned peer dependency.
 
 ## Setup
 
@@ -356,6 +357,13 @@ The wrapper does not limit chart types. If Highcharts supports it and the requir
 | Responsive reflow | `ResizeObserver` plus window resize fallback |
 
 ## Changelog
+
+### 19.0.0
+
+- Added the maintained React 19 package line with React 19.2.7 validation.
+- Kept Highcharts 12.6.0 as the tested compatibility ceiling for this line.
+- Reused the corrected modern live matrix from the React 18 release: realtime charts, static chart families, module-heavy examples, and stable live updates without blinking.
+- Kept README media on the public Stackline assets host.
 
 ### 18.0.0
 

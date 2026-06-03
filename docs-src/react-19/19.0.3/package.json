@@ -6,7 +6,7 @@
     "validate": "node ./stackline-validate.mjs"
   },
   "dependencies": {
-    "highcharts": "12.5.0",
+    "highcharts": "12.6.0",
     "react": "19.0.3",
     "react-dom": "19.0.3",
     "@stackline/react-highcharts": "file:../../.."
