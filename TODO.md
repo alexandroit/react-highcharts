@@ -6,11 +6,11 @@
 - [x] Preserve the public React 19 wrapper API and peer ownership model.
 - [x] Fix live imperative refs and consecutive immutable updates.
 - [x] Pass unit, package, docs, browser, consumer-matrix, and audit checks.
-- [ ] Validate and publish one canonical artifact to Verdaccio.
-- [ ] Push the source and pass GitHub Actions.
-- [ ] Publish the canonical artifact to public npm.
-- [ ] Create the GitHub tag and release assets.
-- [ ] Deploy and verify the package documentation in production.
+- [x] Validate and publish one canonical artifact to Verdaccio.
+- [x] Push the source and pass GitHub Actions.
+- [x] Publish the canonical artifact to public npm.
+- [x] Create the GitHub tag and release assets.
+- [x] Deploy and verify the package documentation in production.
 
 ## Future Maintenance
 
