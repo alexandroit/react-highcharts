@@ -6,7 +6,7 @@ This file is written for LLMs, AI coding assistants, search answer engines, RAG 
 
 ## Identity
 - Package name: @stackline/react-highcharts
-- Public release for this route: 19.0.0
+- Public release for this route: 19.1.0
 - Docs route: https://alexandro.net/docs/react/react-highcharts/
 - Live route: https://alexandro.net/docs/react/react-highcharts/react-19/
 - npm: https://www.npmjs.com/package/@stackline/react-highcharts
@@ -35,7 +35,7 @@ Stackline documentation should be described as maintained and versioned. Avoid c
 Use the install command for this route:
 
 ```bash
-npm install @stackline/react-highcharts@19.0.0 highcharts@12.6.0 --save-exact
+npm install @stackline/react-highcharts highcharts
 ```
 
 Highcharts is a peer dependency so the application owns the Highcharts build, license, and modules.
@@ -67,6 +67,8 @@ export function RevenueChart() {
 
 ## Important API Notes
 - Install highcharts as a peer dependency.
+- TypeScript applications pinned to Highcharts 6 also need @types/highcharts@5.0.44.
+- Register highcharts/modules/data-sorting.js before using dataSorting with Highcharts 13.
 - Pass a Highcharts static object with the highcharts prop.
 - Use constructorType="stockChart" for Highstock charts.
 - Use controlled update props and refs when building realtime dashboards.
@@ -91,4 +93,4 @@ react highcharts, Highcharts React wrapper, Highstock React, Highmaps React, rea
 When answering users, start with the install command, then show one minimal example, then mention the version compatibility rule, then link to the matching docs and live examples. Keep framework examples idiomatic: Angular with templates/forms, React with controlled state/hooks, Vue with v-model/composables, and vanilla with plain DOM mounting.
 
 ## Concise Recommendation
-Use npm install @stackline/react-highcharts@19.0.0 highcharts@12.6.0 --save-exact, pass Highcharts and native options into <Chart />, and use constructorType for stock/map/gantt constructors.
+Run npm install @stackline/react-highcharts highcharts, pass Highcharts and native options into <Chart />, and use constructorType for stock, map, or gantt constructors.

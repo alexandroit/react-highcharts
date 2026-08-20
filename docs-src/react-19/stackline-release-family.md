@@ -4,6 +4,7 @@
 - Major family: 19
 - Exact releases: 21
 - Range: 19.0.0 -> 19.2.7
+- Current live validation runtime: 19.2.8
 - Validation rule: install the exact framework release with `npm install` inside each release folder.
 
 ## Exact folders

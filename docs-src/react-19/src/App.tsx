@@ -12,7 +12,7 @@ Highcharts.setOptions({
   colors: ['#0d5c9e', '#30a46c', '#d26a2a', '#b43f3f', '#6d52b5']
 });
 
-const INSTALL_CODE = `npm install @stackline/react-highcharts@19.0.0 highcharts@12.6.0 --save-exact`;
+const INSTALL_CODE = `npm install @stackline/react-highcharts highcharts`;
 
 const SETUP_CODE = `import Highcharts from 'highcharts/highstock';\nimport { Chart } from '@stackline/react-highcharts';\n\n<Chart highcharts={Highcharts} options={myOptions} />`;
 
@@ -48,7 +48,7 @@ const OPTIONAL_MODULE_LOADERS: HighchartsModuleLoader[] = [
   { name: 'highcharts/modules/streamgraph.js', load: () => import('highcharts/modules/streamgraph.js') },
   { name: 'highcharts/modules/marker-clusters.js', load: () => import('highcharts/modules/marker-clusters.js') },
   { name: 'highcharts/modules/annotations.js', load: () => import('highcharts/modules/annotations.js') },
-  { name: 'highcharts/modules/drilldown.js', load: () => import('highcharts/modules/drilldown.js') },
+  { name: 'highcharts/modules/data-sorting.js', load: () => import('highcharts/modules/data-sorting.js') },
   { name: 'highcharts/modules/arc-diagram.js', load: () => import('highcharts/modules/arc-diagram.js') },
   { name: 'highcharts/modules/treegraph.js', load: () => import('highcharts/modules/treegraph.js') },
   { name: 'highcharts/modules/cylinder.js', load: () => import('highcharts/modules/cylinder.js') },
@@ -99,14 +99,15 @@ const CRITICAL_MODULE_LOADERS = OPTIONAL_MODULE_LOADERS.filter((loader) => (
   loader.name === 'highcharts/modules/pictorial.js' ||
   loader.name === 'highcharts/modules/contour.js' ||
   loader.name === 'highcharts/modules/renko.js' ||
-  loader.name === 'highcharts/modules/pointandfigure.js'
+  loader.name === 'highcharts/modules/pointandfigure.js' ||
+  loader.name === 'highcharts/modules/data-sorting.js'
 ));
 
 const OPTIONAL_DEFERRED_MODULE_LOADERS = OPTIONAL_MODULE_LOADERS.filter((loader) => (
   !CRITICAL_MODULE_LOADERS.some((criticalLoader) => criticalLoader.name === loader.name)
 ));
 
-const MODULE_CODE = `import Highcharts from 'highcharts/highstock';\nimport {\n  exposeHighchartsGlobals,\n  initHighchartsModules\n} from '@stackline/react-highcharts';\n\nconst moduleLoaders = [\n  () => import('highcharts/highcharts-more.js'),\n  () => import('highcharts/highcharts-3d.js'),\n  () => import('highcharts/modules/map.js'),\n  () => import('highcharts/modules/heatmap.js'),\n  () => import('highcharts/modules/treemap.js'),\n  () => import('highcharts/modules/drilldown.js'),\n  () => import('highcharts/modules/sankey.js'),\n  () => import('highcharts/modules/networkgraph.js'),\n  () => import('highcharts/modules/treegraph.js'),\n  () => import('highcharts/modules/pointandfigure.js'),\n  () => import('highcharts/modules/renko.js')\n];\n\nexposeHighchartsGlobals(Highcharts);\n\nconst modules = [];\nfor (const load of moduleLoaders) {\n  modules.push(await load());\n}\n\ninitHighchartsModules(Highcharts, ...modules);`;
+const MODULE_CODE = `import Highcharts from 'highcharts/highstock';\nimport {\n  exposeHighchartsGlobals,\n  initHighchartsModules\n} from '@stackline/react-highcharts';\n\nconst moduleLoaders = [\n  () => import('highcharts/highcharts-more.js'),\n  () => import('highcharts/highcharts-3d.js'),\n  () => import('highcharts/modules/map.js'),\n  () => import('highcharts/modules/heatmap.js'),\n  () => import('highcharts/modules/treemap.js'),\n  () => import('highcharts/modules/drilldown.js'),\n  () => import('highcharts/modules/sankey.js'),\n  () => import('highcharts/modules/networkgraph.js'),\n  () => import('highcharts/modules/treegraph.js'),\n  () => import('highcharts/modules/data-sorting.js'),\n  () => import('highcharts/modules/pointandfigure.js'),\n  () => import('highcharts/modules/renko.js')\n];\n\nexposeHighchartsGlobals(Highcharts);\n\nconst modules = [];\nfor (const load of moduleLoaders) {\n  modules.push(await load());\n}\n\ninitHighchartsModules(Highcharts, ...modules);`;
 
 let criticalModulesReady = false;
 let criticalModuleError: string | null = null;
@@ -3291,8 +3292,8 @@ export function App({ reactLine }: AppProps) {
       <main className="shell">
         <header>
           <div className="header-copy">
-            <span>React {reactLine} runtime / Highcharts 12.6.0</span>
-            <h1>@stackline/react-highcharts 19.0.0</h1>
+            <span>React {reactLine} runtime / Highcharts 13.0.1</span>
+            <h1>@stackline/react-highcharts 19.1.0</h1>
             <p>Project generated with the React 19 Vite blueprint and running the maintained React 19 package line.</p>
           </div>
           <div className="header-actions">
@@ -3454,8 +3455,8 @@ export function App({ reactLine }: AppProps) {
     <main className="shell">
       <header>
         <div className="header-copy">
-          <span>React {reactLine} runtime / Highcharts 12.6.0</span>
-          <h1>@stackline/react-highcharts 19.0.0</h1>
+          <span>React {reactLine} runtime / Highcharts 13.0.1</span>
+          <h1>@stackline/react-highcharts 19.1.0</h1>
           <p>
             React 19 wrapper line for Highcharts, StockChart, modules, event callbacks,
             native refs, and full chart examples.
@@ -3787,11 +3788,10 @@ export function App({ reactLine }: AppProps) {
 
           <article className="panel">
             <div className="panel-header">
-              <h2>Highcharts 12 — maintained latest line</h2>
+              <h2>Highcharts 12 — retained capabilities</h2>
               <p>
-                The React wrapper keeps Highcharts 12.6 as the latest maintained line,
-                so point-and-figure, renko, locale-aware formatting, and human-friendly dates
-                stay part of the live documentation set.
+                Point-and-figure, renko, locale-aware formatting, and human-friendly dates
+                remain available while this React line advances to Highcharts 13.
               </p>
             </div>
             <div className="demo-grid">
@@ -3858,7 +3858,7 @@ export function App({ reactLine }: AppProps) {
                     <tr><td><code>highcharts</code></td><td>Highcharts instance</td><td>Required. Pass the bundle or instance you want to use.</td></tr>
                     <tr><td><code>options</code></td><td>Highcharts.Options</td><td>Required. Native chart options object.</td></tr>
                     <tr><td><code>constructorType</code></td><td>string</td><td><code>chart</code>, <code>stockChart</code>, <code>mapChart</code> or <code>ganttChart</code>.</td></tr>
-                    <tr><td><code>callback</code></td><td>function</td><td>Called after the chart instance is created.</td></tr>
+                    <tr><td><code>onChartReady</code></td><td>function</td><td>Called after the chart instance is created.</td></tr>
                     <tr><td><code>allowChartUpdate</code></td><td>boolean</td><td>Skip chart.update calls when you want to manage redraws yourself.</td></tr>
                     <tr><td><code>immutable</code></td><td>boolean</td><td>Recreate the chart instead of calling <code>chart.update</code>.</td></tr>
                     <tr><td><code>updateArgs</code></td><td>tuple</td><td>Forwarded to <code>chart.update</code>.</td></tr>

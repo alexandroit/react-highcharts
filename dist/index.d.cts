@@ -18,7 +18,7 @@ interface ChartProps {
     updateArgs?: [
         redraw?: boolean,
         oneToOne?: boolean,
-        animation?: boolean | Partial<Highcharts.AnimationOptionsObject>
+        animation?: boolean | object
     ];
     containerProps?: HTMLAttributes<HTMLDivElement>;
 }

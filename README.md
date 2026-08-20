@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
 [![npm monthly](https://img.shields.io/npm/dm/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
-[![license](https://img.shields.io/npm/l/@stackline/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts/blob/master/LICENSE)
+[![license](https://img.shields.io/npm/l/@stackline/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts/blob/main/LICENSE)
 [![React 19](https://img.shields.io/badge/React-19.x-61dafb?style=flat-square&logo=react&logoColor=111111)](https://react.dev/)
 [![Highcharts](https://img.shields.io/badge/Highcharts-6%2B-2f7ed8?style=flat-square)](https://www.highcharts.com/)
 [![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
@@ -15,7 +15,7 @@
   <img src="https://assets.alexandro.net/2026/06/react-highcharts-live.png" alt="Stackline React Highcharts live examples" width="920">
 </p>
 
-**React 19 release:** `19.0.0`
+**React 19 release:** `19.1.0`
 
 ---
 
@@ -29,13 +29,14 @@
 
 The goal is not to hide Highcharts. Your application still owns the real Highcharts options object, the Highcharts instance, module registration, constructor choice, event callbacks, and native chart instance. The wrapper gives React a stable `<Chart>` component, typed props, ref access, resize-aware rendering, SSR-safe effects, module helper utilities, and update modes that avoid unnecessary full chart recreation.
 
-The React 19 package family is `19.0.0` and is intended for React `19.x` applications. The validation app for this line uses a real React 19 project, renders static chart examples, renders realtime market examples, and validates that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
+The React 19 package family is intended for React `19.x` applications. Release `19.1.0` is validated with React `19.2.8` and Highcharts `13.0.1`. The validation app renders static chart examples, realtime market examples, and verifies that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
 
 ## Features
 
 | Feature | Supported |
 | :--- | :---: |
 | React 19 tested release line | ✅ |
+| Highcharts 13 tested release line | ✅ |
 | Standard `Highcharts.Chart` rendering | ✅ |
 | `stockChart` constructor support | ✅ |
 | `mapChart` and `ganttChart` constructor names | ✅ |
@@ -58,17 +59,18 @@ The React 19 package family is `19.0.0` and is intended for React `19.x` applica
 
 1. [React Version Compatibility](#react-version-compatibility)
 2. [Installation](#installation)
-3. [Setup](#setup)
-4. [Basic Usage](#basic-usage)
-5. [Constructor Switch](#constructor-switch)
-6. [Highcharts Modules](#highcharts-modules)
-7. [Events](#events)
-8. [Native Chart Instance](#native-chart-instance)
-9. [Dynamic Updates](#dynamic-updates)
-10. [Common Chart Types](#common-chart-types)
-11. [API Surface](#api-surface)
-12. [Wrapper Capabilities](#wrapper-capabilities)
-13. [License](#license)
+3. [Highcharts Compatibility](#highcharts-compatibility)
+4. [Setup](#setup)
+5. [Basic Usage](#basic-usage)
+6. [Constructor Switch](#constructor-switch)
+7. [Highcharts Modules](#highcharts-modules)
+8. [Events](#events)
+9. [Native Chart Instance](#native-chart-instance)
+10. [Dynamic Updates](#dynamic-updates)
+11. [Common Chart Types](#common-chart-types)
+12. [API Surface](#api-surface)
+13. [Wrapper Capabilities](#wrapper-capabilities)
+14. [License](#license)
 
 ## React Version Compatibility
 
@@ -76,7 +78,7 @@ Each package family targets one React major. Keep the package major aligned with
 
 | Package family | React family | Peer range | Install |
 | :---: | :---: | :---: | :--- |
-| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.0.0 highcharts@12.6.0 --save-exact` |
+| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.0 highcharts@13.0.1 --save-exact` |
 | `18.x` | React `18.x` | `>=18.0.0 <19.0.0` | `npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact` |
 | `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | `npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact` |
 
@@ -85,16 +87,27 @@ Each React major is released separately so every line can be tested with the mat
 ## Installation
 
 ```bash
-npm install @stackline/react-highcharts@19.0.0 highcharts@12.6.0 --save-exact
+npm install @stackline/react-highcharts highcharts
 ```
 
 The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
 
+Use `npm install @stackline/react-highcharts@19.1.0 highcharts@13.0.1 --save-exact` when your release process pins exact dependency versions.
+
 ## Highcharts Compatibility
 
-The React 19 validation app uses `highcharts@12.6.0`, which is the highest Highcharts version tested for this line.
+The React 19 validation app uses `highcharts@13.0.1`, which is the highest Highcharts version tested for this line.
 
-The maintained Stackline React 19 line is published with a Highcharts peer range of `>=6.0.0 <=12.6.0` so applications get a clear, reproducible compatibility ceiling while still keeping Highcharts as an application-owned peer dependency.
+The maintained Stackline React 19 line is published with a Highcharts peer range of `>=6.0.0 <=13.0.1` so applications get a clear compatibility ceiling while still keeping Highcharts as an application-owned peer dependency.
+
+Highcharts 6 predates bundled TypeScript declarations. JavaScript applications can use it directly; TypeScript applications pinned to Highcharts 6 must also install the historical `@types/highcharts@5.0.44` declarations. Highcharts 7 and newer include their own declarations.
+
+Highcharts 13 moved data sorting into a separate module. Applications that use `plotOptions.series.dataSorting` should register it during startup:
+
+```tsx
+const dataSortingModule = await import('highcharts/modules/data-sorting.js');
+initHighchartsModules(Highcharts, dataSortingModule);
+```
 
 ## Setup
 
@@ -358,6 +371,14 @@ The wrapper does not limit chart types. If Highcharts supports it and the requir
 
 ## Changelog
 
+### 19.1.0
+
+- Validated React 19.2.8, React DOM 19.2.8, and Highcharts 13.0.1 without changing the wrapper API.
+- Fixed imperative refs so `chart` and `container` always expose the live instances.
+- Fixed consecutive `immutable` updates so every requested recreation is applied.
+- Added lifecycle, module, package, browser, and audit release contracts.
+- Updated the React 19 demo to Vite 8.2.1 and explicit Highcharts 13 data-sorting registration.
+
 ### 19.0.0
 
 - Added the maintained React 19 package line with React 19.2.7 validation.
@@ -384,4 +405,6 @@ The wrapper does not limit chart types. If Highcharts supports it and the requir
 
 ## License
 
-MIT
+The React wrapper in this repository is released under the [MIT License](LICENSE).
+
+Highcharts is a separate peer dependency and is not distributed under this repository's MIT license. Review the [Highcharts licensing terms](https://www.highcharts.com/license) for your application.

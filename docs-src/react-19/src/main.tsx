@@ -47,7 +47,7 @@ async function bootstrap() {
   createRoot(rootContainer).render(
     <React.StrictMode>
       <DocsErrorBoundary>
-        <App reactLine="19.2.7" />
+        <App reactLine="19.2.8" />
       </DocsErrorBoundary>
     </React.StrictMode>
   );

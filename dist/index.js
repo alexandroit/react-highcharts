@@ -85,10 +85,20 @@ var Chart = forwardRef(function Chart2({
   onReadyRef.current = onChartReady;
   useImperativeHandle(
     ref,
-    () => ({
-      chart: chartRef.current,
-      container: containerRef.current
-    }),
+    () => {
+      const handle = {};
+      Object.defineProperties(handle, {
+        chart: {
+          enumerable: true,
+          get: () => chartRef.current
+        },
+        container: {
+          enumerable: true,
+          get: () => containerRef.current
+        }
+      });
+      return handle;
+    },
     []
   );
   function destroyChart() {
@@ -168,6 +178,7 @@ var Chart = forwardRef(function Chart2({
     }
     if (immutable) {
       createChart();
+      skipNextUpdateRef.current = false;
       return;
     }
     if (!allowChartUpdate) {
@@ -177,7 +188,12 @@ var Chart = forwardRef(function Chart2({
       sanitizeChartDom(chart);
       return;
     }
-    chart.update(options, updateArgs[0], updateArgs[1], updateArgs[2]);
+    chart.update(
+      options,
+      updateArgs[0],
+      updateArgs[1],
+      updateArgs[2]
+    );
     sanitizeChartDom(chart);
   }, [
     options,

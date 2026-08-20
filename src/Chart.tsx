@@ -25,7 +25,7 @@ export interface ChartProps {
   updateArgs?: [
     redraw?: boolean,
     oneToOne?: boolean,
-    animation?: boolean | Partial<Highcharts.AnimationOptionsObject>
+    animation?: boolean | object
   ];
   containerProps?: HTMLAttributes<HTMLDivElement>;
 }
@@ -128,10 +128,22 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
 
   useImperativeHandle(
     ref,
-    () => ({
-      chart: chartRef.current,
-      container: containerRef.current
-    }),
+    () => {
+      const handle = {} as ChartHandle;
+
+      Object.defineProperties(handle, {
+        chart: {
+          enumerable: true,
+          get: () => chartRef.current
+        },
+        container: {
+          enumerable: true,
+          get: () => containerRef.current
+        }
+      });
+
+      return handle;
+    },
     []
   );
 
@@ -241,6 +253,7 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
 
     if (immutable) {
       createChart();
+      skipNextUpdateRef.current = false;
       return;
     }
 
@@ -253,7 +266,12 @@ export const Chart = forwardRef<ChartHandle, ChartProps>(function Chart(
       return;
     }
 
-    chart.update(options, updateArgs[0], updateArgs[1], updateArgs[2]);
+    chart.update(
+      options,
+      updateArgs[0],
+      updateArgs[1],
+      updateArgs[2] as boolean | Partial<Highcharts.AnimationOptionsObject>
+    );
     sanitizeChartDom(chart);
   }, [
     options,
