@@ -80,7 +80,15 @@ try {
     if (message.type() !== 'error') return;
 
     const sourceUrl = message.stackTrace()[0]?.url;
-    if (!sourceUrl || new URL(sourceUrl).origin === firstPartyOrigin) {
+    const referencedUrls = message.text().match(/https?:\/\/[^\s'"\)]+/g) || [];
+    const referencesOnlyThirdParties = referencedUrls.length > 0 && referencedUrls.every(
+      (url) => new URL(url).origin !== firstPartyOrigin
+    );
+
+    if (
+      (sourceUrl && new URL(sourceUrl).origin === firstPartyOrigin) ||
+      (!sourceUrl && !referencesOnlyThirdParties)
+    ) {
       failures.push(`console: ${message.text()}`);
     }
   });
