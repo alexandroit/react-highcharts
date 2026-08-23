@@ -2,12 +2,14 @@
   "name": "@stackline/react-highcharts-docs-react17",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stackline/react-highcharts": "17.0.0",
     "highcharts": "12.6.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
@@ -16,8 +18,8 @@
     "@types/node": "24.10.1",
     "@types/react": "17.0.91",
     "@types/react-dom": "17.0.26",
-    "@vitejs/plugin-react": "6.0.1",
+    "@vitejs/plugin-react": "6.1.0",
     "typescript": "5.9.3",
-    "vite": "8.0.3"
+    "vite": "8.2.1"
   }
 }

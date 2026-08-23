@@ -7,11 +7,10 @@ export default defineConfig({
   base: './',
   resolve: {
     alias: {
-      '@stackline/react-highcharts': resolve(__dirname, '../../src/index.ts'),
-      react: resolve(__dirname, 'node_modules/react'),
-      'react/jsx-runtime': resolve(__dirname, 'node_modules/react/jsx-runtime.js'),
-      'react/jsx-dev-runtime': resolve(__dirname, 'node_modules/react/jsx-dev-runtime.js'),
-      'react-dom': resolve(__dirname, 'node_modules/react-dom')
+      react: resolve(import.meta.dirname, 'node_modules/react'),
+      'react/jsx-runtime': resolve(import.meta.dirname, 'node_modules/react/jsx-runtime.js'),
+      'react/jsx-dev-runtime': resolve(import.meta.dirname, 'node_modules/react/jsx-dev-runtime.js'),
+      'react-dom': resolve(import.meta.dirname, 'node_modules/react-dom')
     },
     dedupe: ['react', 'react-dom']
   },

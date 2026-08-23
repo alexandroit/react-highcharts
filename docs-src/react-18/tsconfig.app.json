@@ -15,11 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client"],
-    "baseUrl": ".",
-    "paths": {
-      "@stackline/react-highcharts": ["../../src/index.ts"]
-    }
+    "types": ["vite/client"]
   },
-  "include": ["src", "../../src"]
+  "include": ["src"]
 }

@@ -4,6 +4,9 @@ All notable changes to `@stackline/react-highcharts` are documented here.
 
 ## Unreleased
 
+- Updated the React 17 and React 18 documentation apps to the same patched
+  Vite 8.2 toolchain as React 19, committed reproducible lockfiles, and added
+  every supported demo line to the browser CI job.
 - Moved exact-version dependency records to `package.fixture.json`, repaired
   their validators, and added an offline catalog contract to keep historical
   metadata out of active dependency alerts.

@@ -32,7 +32,7 @@ jobs:
       - run: npm audit --audit-level=low
 
   browser:
-    name: React 19 and Highcharts 13 browser contract
+    name: Supported React docs and Highcharts 13 browser contract
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -40,9 +40,20 @@ jobs:
         with:
           node-version: 22.22.3
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            docs-src/react-17/package-lock.json
+            docs-src/react-18/package-lock.json
+            docs-src/react-19/package-lock.json
       - run: npm install --global npm@10.9.8
       - run: npm ci
       - run: npm run check
+      - run: npm ci --prefix docs-src/react-17
+      - run: npm run build:docs:react-17
+      - run: npm audit --prefix docs-src/react-17 --audit-level=low
+      - run: npm ci --prefix docs-src/react-18
+      - run: npm run build:docs:react-18
+      - run: npm audit --prefix docs-src/react-18 --audit-level=low
       - run: npm ci --prefix docs-src/react-19
       - run: npm run build:docs:react-19
       - run: npm run test:browser
