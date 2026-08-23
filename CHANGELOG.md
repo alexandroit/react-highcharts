@@ -2,6 +2,12 @@
 
 All notable changes to `@stackline/react-highcharts` are documented here.
 
+## Unreleased
+
+- Moved exact-version dependency records to `package.fixture.json`, repaired
+  their validators, and added an offline catalog contract to keep historical
+  metadata out of active dependency alerts.
+
 ## 19.1.0 - 2026-08-19
 
 - Validate the current line with React 19.2.8, React DOM 19.2.8, and Highcharts 13.0.1.
