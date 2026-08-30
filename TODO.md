@@ -1,5 +1,10 @@
 # TODO
 
+## Release 19.1.1
+
+- [x] Validate Highcharts 13.0.2 through package, consumer, and browser gates.
+- [x] Verify the direct production peer closure and npm audit result.
+
 ## Release 19.1.0
 
 - [x] Audit current React, Highcharts, TypeScript, Vite, and build-tool releases.

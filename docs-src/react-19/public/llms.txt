@@ -3,9 +3,9 @@
 > A maintained React wrapper for Highcharts, Highstock, and Highmaps with native options, constructor switching, module helpers, live refs, resize-aware rendering, controlled update modes, and live demos.
 
 Package: @stackline/react-highcharts
-Current/public release: 19.1.0
+Current/public release: 19.1.1
 Docs scope: React 19 Highcharts docs
-Framework/runtime compatibility: React 19.x; react and react-dom peer range >=19.0.0 <20.0.0; Highcharts peer range >=6.0.0 <=13.0.1.
+Framework/runtime compatibility: React 19.x; react and react-dom peer range >=19.0.0 <20.0.0; Highcharts peer range >=6.0.0 <=13.0.2.
 Install: npm install @stackline/react-highcharts highcharts
 
 - Canonical docs: https://alexandro.net/docs/react/react-highcharts/react-19/
@@ -28,7 +28,7 @@ Install: npm install @stackline/react-highcharts highcharts
 - Static and realtime browser-tested examples for common Highcharts types.
 
 ## Compatibility Notes
-- Release 19.1.0 is validated with React 19.2.8 and Highcharts 13.0.1.
+- Release 19.1.1 is validated with React 19.2.8 and Highcharts 13.0.2.
 - Highcharts remains an application-owned peer dependency with separate licensing terms.
 - TypeScript consumers pinned to Highcharts 6 also need @types/highcharts@5.0.44; Highcharts 7 and newer bundle declarations.
 - Highcharts 13 users must register highcharts/modules/data-sorting.js when using dataSorting options.

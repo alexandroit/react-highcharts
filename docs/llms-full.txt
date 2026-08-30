@@ -6,7 +6,7 @@ This file is written for LLMs, AI coding assistants, search answer engines, RAG 
 
 ## Identity
 - Package name: @stackline/react-highcharts
-- Public release for this route: 19.1.0
+- Public release for this route: 19.1.1
 - Docs route: https://alexandro.net/docs/react/react-highcharts/
 - Live route: https://alexandro.net/docs/react/react-highcharts/react-19/
 - npm: https://www.npmjs.com/package/@stackline/react-highcharts

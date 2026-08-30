@@ -9,8 +9,8 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
 
 assert.equal(packageJson.name, '@stackline/react-highcharts');
-assert.equal(packageJson.version, '19.1.0');
-assert.equal(packageJson.peerDependencies.highcharts, '>=6.0.0 <=13.0.1');
+assert.equal(packageJson.version, '19.1.1');
+assert.equal(packageJson.peerDependencies.highcharts, '>=6.0.0 <=13.0.2');
 assert.equal(packageJson.peerDependencies.react, '>=19.0.0 <20.0.0');
 assert.equal(packageJson.peerDependencies['react-dom'], '>=19.0.0 <20.0.0');
 assert.equal(packageJson.exports['.'].import.types, './dist/index.d.ts');

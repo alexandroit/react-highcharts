@@ -11,6 +11,13 @@ All notable changes to `@stackline/react-highcharts` are documented here.
   their validators, and added an offline catalog contract to keep historical
   metadata out of active dependency alerts.
 
+## 19.1.1 - 2026-08-30
+
+- Validate React 19.2.8 and React DOM 19.2.8 with Highcharts 13.0.2.
+- Extend only the tested Highcharts peer ceiling; the component, helper, and
+  TypeScript APIs are unchanged.
+- Verify direct production installs without warnings or known audit findings.
+
 ## 19.1.0 - 2026-08-19
 
 - Validate the current line with React 19.2.8, React DOM 19.2.8, and Highcharts 13.0.1.

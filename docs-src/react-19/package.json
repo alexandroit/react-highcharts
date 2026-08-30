@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "highcharts": "13.0.1",
+    "highcharts": "13.0.2",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

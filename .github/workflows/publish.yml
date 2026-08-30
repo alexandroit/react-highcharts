@@ -71,4 +71,4 @@ jobs:
           name: npm-release
           path: artifact/
           if-no-files-found: error
-      - run: npm publish artifact/*.tgz --access public --provenance --registry=https://registry.npmjs.org
+      - run: npm publish ./artifact/*.tgz --access public --provenance --registry=https://registry.npmjs.org

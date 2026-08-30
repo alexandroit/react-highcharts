@@ -3,7 +3,7 @@
 > A maintained React wrapper for Highcharts, Highstock, and Highmaps with native options, constructor switching, module helpers, refs, resize-aware rendering, controlled update modes, and live demos.
 
 Package: @stackline/react-highcharts
-Current/public release: 19.1.0
+Current/public release: 19.1.1
 Docs scope: React Highcharts version matrix
 Framework/runtime compatibility: React 17, React 18, and React 19 release lines; choose the package major matching React.
 Install: npm install @stackline/react-highcharts highcharts

@@ -27,7 +27,7 @@ assert.ok(fs.existsSync(tarball), `Package tarball not found: ${tarball}`);
 const matrices = [
   { name: 'legacy-peer-floor', react: '19.0.0', highcharts: '6.2.0' },
   { name: 'previous-highcharts', react: '19.0.0', highcharts: '12.6.0' },
-  { name: 'current', react: '19.2.8', highcharts: '13.0.1' }
+  { name: 'current', react: '19.2.8', highcharts: '13.0.2' }
 ];
 
 try {
