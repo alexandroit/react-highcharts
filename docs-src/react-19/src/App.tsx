@@ -12,7 +12,7 @@ Highcharts.setOptions({
   colors: ['#0d5c9e', '#30a46c', '#d26a2a', '#b43f3f', '#6d52b5']
 });
 
-const INSTALL_CODE = `npm install @stackline/react-highcharts highcharts`;
+const INSTALL_CODE = `npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact`;
 
 const SETUP_CODE = `import Highcharts from 'highcharts/highstock';\nimport { Chart } from '@stackline/react-highcharts';\n\n<Chart highcharts={Highcharts} options={myOptions} />`;
 

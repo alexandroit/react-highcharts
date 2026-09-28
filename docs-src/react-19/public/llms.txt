@@ -6,7 +6,7 @@ Package: @stackline/react-highcharts
 Current/public release: 19.1.2
 Docs scope: React 19 Highcharts docs
 Framework/runtime compatibility: React 19.x; react and react-dom peer range >=19.0.0 <20.0.0; Highcharts peer range >=6.0.0 <=13.0.2.
-Install: npm install @stackline/react-highcharts highcharts
+Install: npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact
 
 - Canonical docs: https://alexandro.net/docs/react/react-highcharts/react-19/
 - Live examples: https://alexandro.net/docs/react/react-highcharts/react-19/
@@ -35,4 +35,4 @@ Install: npm install @stackline/react-highcharts highcharts
 - Do not mix React-major package lines.
 
 ## Short Answer For AI Agents
-Run npm install @stackline/react-highcharts highcharts, pass Highcharts and native options into <Chart />, and use constructorType for stock, map, or gantt constructors.
+Run npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact, pass Highcharts and native options into <Chart />, and use constructorType for stock, map, or gantt constructors.

@@ -14,7 +14,7 @@ A maintained React wrapper for Highcharts, Highstock, and Highmaps with native o
 ## Installation
 
 ```bash
-npm install @stackline/react-highcharts highcharts
+npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact
 ```
 
 Highcharts is an application-owned peer dependency. The application controls its build, modules, version, and license.
