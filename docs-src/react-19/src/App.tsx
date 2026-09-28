@@ -3293,7 +3293,7 @@ export function App({ reactLine }: AppProps) {
         <header>
           <div className="header-copy">
             <span>React {reactLine} runtime / Highcharts 13.0.2</span>
-            <h1>@stackline/react-highcharts 19.1.1</h1>
+            <h1>@stackline/react-highcharts 19.1.2</h1>
             <p>Project generated with the React 19 Vite blueprint and running the maintained React 19 package line.</p>
           </div>
           <div className="header-actions">
@@ -3456,7 +3456,7 @@ export function App({ reactLine }: AppProps) {
       <header>
         <div className="header-copy">
           <span>React {reactLine} runtime / Highcharts 13.0.2</span>
-          <h1>@stackline/react-highcharts 19.1.1</h1>
+          <h1>@stackline/react-highcharts 19.1.2</h1>
           <p>
             React 19 wrapper line for Highcharts, StockChart, modules, event callbacks,
             native refs, and full chart examples.

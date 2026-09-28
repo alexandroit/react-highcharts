@@ -4,6 +4,13 @@ All notable changes to `@stackline/react-highcharts` are documented here.
 
 ## Unreleased
 
+## 19.1.2 - 2026-09-28
+
+- Organize package documentation, preserve examples and compatibility guidance, and add verified Stackline community links.
+- Add precise Stackline discovery metadata and standardize GitHub release tooling on Node 24.20.0 and npm 11.19.0.
+- Fail closed on registry lookup errors and use the reviewed GitHub artifact workflow for public npm releases.
+
+
 - Updated the React 17 and React 18 documentation apps to the same patched
   Vite 8.2 toolchain as React 19, committed reproducible lockfiles, and added
   every supported demo line to the browser CI job.

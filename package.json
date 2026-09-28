@@ -1,6 +1,6 @@
 {
   "name": "@stackline/react-highcharts",
-  "version": "19.1.1",
+  "version": "19.1.2",
   "description": "A maintained React 19 wrapper for Highcharts, Highstock, and Highmaps with native options, constructor switching, module helpers, refs, and realtime update modes.",
   "keywords": [
     "react",
@@ -24,7 +24,10 @@
     "chart-wrapper",
     "wrapper",
     "ui-component",
-    "maintained"
+    "maintained",
+    "stackline",
+    "react19",
+    "chart-component"
   ],
   "homepage": "https://alexandro.net/docs/react/react-highcharts/",
   "bugs": {
@@ -59,7 +62,7 @@
     }
   },
   "sideEffects": false,
-  "packageManager": "npm@10.9.8",
+  "packageManager": "npm@11.19.0",
   "scripts": {
     "test:fixtures": "node tools/stackline-run-release-smoke.mjs --catalog",
     "build": "tsup",

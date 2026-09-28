@@ -15,7 +15,7 @@
   <img src="https://assets.alexandro.net/2026/06/react-highcharts-live.png" alt="Stackline React Highcharts live examples" width="920">
 </p>
 
-**React 19 release:** `19.1.1`
+**Package version:** `19.1.2`
 
 ---
 
@@ -23,13 +23,125 @@
 
 ---
 
-## Why this library?
+## Contents
+
+- [Why this package?](#why-this-package)
+- [Compatibility](#compatibility)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Security](#security)
+- [API Surface](#api-surface)
+- [Local Development](#local-development)
+- [Consumer Smoke Test](#consumer-smoke-test)
+- [Release Checklist](#release-checklist)
+- [Community and Support](#community-and-support)
+- [License](#license)
+
+<a id="why-this-library"></a>
+
+## Why this package?
 
 `@stackline/react-highcharts` gives React 19 applications a small, predictable bridge to Highcharts.
 
 The goal is not to hide Highcharts. Your application still owns the real Highcharts options object, the Highcharts instance, module registration, constructor choice, event callbacks, and native chart instance. The wrapper gives React a stable `<Chart>` component, typed props, ref access, resize-aware rendering, SSR-safe effects, module helper utilities, and update modes that avoid unnecessary full chart recreation.
 
-The React 19 package family is intended for React `19.x` applications. Release `19.1.1` is validated with React `19.2.8` and Highcharts `13.0.2`. The validation app renders static chart examples, realtime market examples, and verifies that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
+The React 19 package family is intended for React `19.x` applications. Release `19.1.2` is validated with React `19.2.8` and Highcharts `13.0.2`. The validation app renders static chart examples, realtime market examples, and verifies that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
+
+## Compatibility
+
+| Item | Value |
+| --- | --- |
+| Package | `@stackline/react-highcharts@19.1.2` |
+| Peer: `highcharts` | `>=6.0.0 <=13.0.2` |
+| Peer: `react` | `>=19.0.0 <20.0.0` |
+| Peer: `react-dom` | `>=19.0.0 <20.0.0` |
+| Runtime dependencies | None; framework peers are supplied by the application |
+| Package format | ESM, CommonJS, and TypeScript declarations |
+
+
+
+
+### React Version Compatibility
+
+Each package family targets one React major. Keep the package major aligned with the React major used by your application.
+
+| Package family | React family | Peer range | Install |
+| :---: | :---: | :---: | :--- |
+| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact` |
+| `18.x` | React `18.x` | `>=18.0.0 <19.0.0` | `npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact` |
+| `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | `npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact` |
+
+Each React major is released separately so every line can be tested with the matching React runtime and project template.
+
+
+
+### Highcharts Compatibility
+
+The React 19 validation app uses `highcharts@13.0.2`, which is the highest Highcharts version tested for this line.
+
+The maintained Stackline React 19 line is published with a Highcharts peer range of `>=6.0.0 <=13.0.2` so applications get a clear compatibility ceiling while still keeping Highcharts as an application-owned peer dependency.
+
+Highcharts 6 predates bundled TypeScript declarations. JavaScript applications can use it directly; TypeScript applications pinned to Highcharts 6 must also install the historical `@types/highcharts@5.0.44` declarations. Highcharts 7 and newer include their own declarations.
+
+Highcharts 13 moved data sorting into a separate module. Applications that use `plotOptions.series.dataSorting` should register it during startup:
+
+```tsx
+const dataSortingModule = await import('highcharts/modules/data-sorting.js');
+initHighchartsModules(Highcharts, dataSortingModule);
+```
+
+<a id="install"></a>
+
+## Installation
+
+```bash
+npm install @stackline/react-highcharts highcharts
+```
+
+The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
+
+Use `npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact` when your release process pins exact dependency versions.
+
+## Usage
+
+### Setup
+
+#### 1. Import Highcharts and the wrapper
+
+```tsx
+import Highcharts from 'highcharts';
+import { Chart } from '@stackline/react-highcharts';
+```
+
+#### 2. Render the wrapper with native Highcharts options
+
+```tsx
+<Chart highcharts={Highcharts} options={options} />
+```
+
+### Basic Usage
+
+#### 1. Render a chart
+
+```tsx
+import Highcharts from 'highcharts';
+import { Chart } from '@stackline/react-highcharts';
+
+const options: Highcharts.Options = {
+  chart: { type: 'line' },
+  title: { text: 'Simple chart' },
+  xAxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr'] },
+  yAxis: { title: { text: 'Revenue' } },
+  series: [
+    { type: 'line', name: 'Orders', data: [29.9, 71.5, 106.4, 129.2] }
+  ]
+};
+
+export function RevenueChart() {
+  return <Chart highcharts={Highcharts} options={options} />;
+}
+```
 
 ## Features
 
@@ -55,99 +167,36 @@ The React 19 package family is intended for React `19.x` applications. Release `
 | Realtime chart demo coverage | ✅ |
 | Versioned docs builds per React line | ✅ |
 
-## Table of Contents
+## Security
 
-1. [React Version Compatibility](#react-version-compatibility)
-2. [Installation](#installation)
-3. [Highcharts Compatibility](#highcharts-compatibility)
-4. [Setup](#setup)
-5. [Basic Usage](#basic-usage)
-6. [Constructor Switch](#constructor-switch)
-7. [Highcharts Modules](#highcharts-modules)
-8. [Events](#events)
-9. [Native Chart Instance](#native-chart-instance)
-10. [Dynamic Updates](#dynamic-updates)
-11. [Common Chart Types](#common-chart-types)
-12. [API Surface](#api-surface)
-13. [Wrapper Capabilities](#wrapper-capabilities)
-14. [License](#license)
+See the [security policy](https://github.com/alexandroit/react-highcharts/blob/main/SECURITY.md) for supported release lines and private vulnerability reporting.
 
-## React Version Compatibility
+Keep framework peers and application dependencies patched. Dependency audits cover known advisories; they do not establish that an application is secure.
 
-Each package family targets one React major. Keep the package major aligned with the React major used by your application.
+## API Surface
 
-| Package family | React family | Peer range | Install |
-| :---: | :---: | :---: | :--- |
-| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.1 highcharts@13.0.2 --save-exact` |
-| `18.x` | React `18.x` | `>=18.0.0 <19.0.0` | `npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact` |
-| `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | `npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact` |
+| Prop | Type | Notes |
+| :--- | :--- | :--- |
+| `highcharts` | `typeof Highcharts` | Required. Pass the Highcharts instance or bundle your application wants to use. |
+| `options` | `Highcharts.Options` | Required. Passed into the selected Highcharts constructor. |
+| `constructorType` | `'chart' \| 'stockChart' \| 'mapChart' \| 'ganttChart'` | Defaults to `'chart'`. |
+| `onChartReady` | `(chart: Highcharts.Chart) => void` | Called after the chart is created. |
+| `allowChartUpdate` | `boolean` | Defaults to `true`. Set to `false` for manual native updates. |
+| `immutable` | `boolean` | Recreates the chart instead of calling `chart.update(...)`. |
+| `updateMode` | `'options' \| 'series-data'` | Defaults to `'options'`. Use `'series-data'` for stable realtime series. |
+| `updateArgs` | `[redraw, oneToOne, animation]` | Forwarded to `chart.update(...)` in options mode. |
+| `containerProps` | `React.HTMLAttributes<HTMLDivElement>` | Props and styles for the chart container. |
 
-Each React major is released separately so every line can be tested with the matching React runtime and project template.
-
-## Installation
-
-```bash
-npm install @stackline/react-highcharts highcharts
-```
-
-The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
-
-Use `npm install @stackline/react-highcharts@19.1.1 highcharts@13.0.2 --save-exact` when your release process pins exact dependency versions.
-
-## Highcharts Compatibility
-
-The React 19 validation app uses `highcharts@13.0.2`, which is the highest Highcharts version tested for this line.
-
-The maintained Stackline React 19 line is published with a Highcharts peer range of `>=6.0.0 <=13.0.2` so applications get a clear compatibility ceiling while still keeping Highcharts as an application-owned peer dependency.
-
-Highcharts 6 predates bundled TypeScript declarations. JavaScript applications can use it directly; TypeScript applications pinned to Highcharts 6 must also install the historical `@types/highcharts@5.0.44` declarations. Highcharts 7 and newer include their own declarations.
-
-Highcharts 13 moved data sorting into a separate module. Applications that use `plotOptions.series.dataSorting` should register it during startup:
-
-```tsx
-const dataSortingModule = await import('highcharts/modules/data-sorting.js');
-initHighchartsModules(Highcharts, dataSortingModule);
-```
-
-## Setup
-
-### 1. Import Highcharts and the wrapper
-
-```tsx
-import Highcharts from 'highcharts';
-import { Chart } from '@stackline/react-highcharts';
-```
-
-### 2. Render the wrapper with native Highcharts options
-
-```tsx
-<Chart highcharts={Highcharts} options={options} />
-```
-
-## Basic Usage
-
-### 1. Render a chart
-
-```tsx
-import Highcharts from 'highcharts';
-import { Chart } from '@stackline/react-highcharts';
-
-const options: Highcharts.Options = {
-  chart: { type: 'line' },
-  title: { text: 'Simple chart' },
-  xAxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr'] },
-  yAxis: { title: { text: 'Revenue' } },
-  series: [
-    { type: 'line', name: 'Orders', data: [29.9, 71.5, 106.4, 129.2] }
-  ]
-};
-
-export function RevenueChart() {
-  return <Chart highcharts={Highcharts} options={options} />;
-}
-```
-
-## Constructor Switch
+| Export | Type | Notes |
+| :--- | :--- | :--- |
+| `Chart` | React component | Main wrapper component. |
+| `ChartHandle` | Type | Ref shape with `chart` and `container`. |
+| `ChartProps` | Type | Component prop type. |
+| `ConstructorType` | Type | Supported constructor string union. |
+| `exposeHighchartsGlobals` | Function | Assigns `Highcharts` and `_Highcharts` on `globalThis` for modules that expect globals. |
+| `initHighchartsModules` | Function | Applies Highcharts modules once per Highcharts instance. |
+| `HighchartsModuleFactory` | Type | Accepted module factory shape. |
+### Constructor Switch
 
 Use `constructorType` when the chart should be created with another Highcharts constructor.
 
@@ -187,7 +236,8 @@ Common constructor values:
 | `mapChart` | Highmaps-style charts when the matching Highcharts build is registered. |
 | `ganttChart` | Gantt-style charts when the matching Highcharts build is registered. |
 
-## Highcharts Modules
+
+### Highcharts Modules
 
 Register Highcharts modules once at application startup. The helper accepts both direct module factories and ESM default exports.
 
@@ -219,7 +269,8 @@ initHighchartsModules(
 
 The live test matrix covers examples for line, spline, area, areaspline, column, bar, stacked column, pie, donut, scatter, bubble, combination, polar, gauge, solid gauge, heatmap, treemap, funnel, 3D column, StockChart, map-like charts, renko, point-and-figure, and no-data states.
 
-## Events
+
+### Events
 
 Highcharts event callbacks stay inside the native options object, so existing Highcharts knowledge transfers directly.
 
@@ -254,7 +305,8 @@ const options: Highcharts.Options = {
 };
 ```
 
-## Native Chart Instance
+
+### Native Chart Instance
 
 Use a React ref when your application needs the real `Highcharts.Chart` instance.
 
@@ -288,7 +340,8 @@ export function ImperativeChart() {
 }
 ```
 
-## Dynamic Updates
+
+### Dynamic Updates
 
 By default, the wrapper calls `chart.update(options, ...updateArgs)` when the options prop changes.
 
@@ -320,7 +373,8 @@ Use `allowChartUpdate={false}` when a chart should be created once and then cont
 />
 ```
 
-## Common Chart Types
+
+### Common Chart Types
 
 The wrapper does not limit chart types. If Highcharts supports it and the required module is registered, pass the native options object.
 
@@ -332,31 +386,8 @@ The wrapper does not limit chart types. If Highcharts supports it and the requir
 | Advanced modules | 3D column, packed bubble, dependency wheel, network graph, sunburst |
 | Map-like modules | map-style charts when the matching Highcharts map build is registered |
 
-## API Surface
 
-| Prop | Type | Notes |
-| :--- | :--- | :--- |
-| `highcharts` | `typeof Highcharts` | Required. Pass the Highcharts instance or bundle your application wants to use. |
-| `options` | `Highcharts.Options` | Required. Passed into the selected Highcharts constructor. |
-| `constructorType` | `'chart' \| 'stockChart' \| 'mapChart' \| 'ganttChart'` | Defaults to `'chart'`. |
-| `onChartReady` | `(chart: Highcharts.Chart) => void` | Called after the chart is created. |
-| `allowChartUpdate` | `boolean` | Defaults to `true`. Set to `false` for manual native updates. |
-| `immutable` | `boolean` | Recreates the chart instead of calling `chart.update(...)`. |
-| `updateMode` | `'options' \| 'series-data'` | Defaults to `'options'`. Use `'series-data'` for stable realtime series. |
-| `updateArgs` | `[redraw, oneToOne, animation]` | Forwarded to `chart.update(...)` in options mode. |
-| `containerProps` | `React.HTMLAttributes<HTMLDivElement>` | Props and styles for the chart container. |
-
-| Export | Type | Notes |
-| :--- | :--- | :--- |
-| `Chart` | React component | Main wrapper component. |
-| `ChartHandle` | Type | Ref shape with `chart` and `container`. |
-| `ChartProps` | Type | Component prop type. |
-| `ConstructorType` | Type | Supported constructor string union. |
-| `exposeHighchartsGlobals` | Function | Assigns `Highcharts` and `_Highcharts` on `globalThis` for modules that expect globals. |
-| `initHighchartsModules` | Function | Applies Highcharts modules once per Highcharts instance. |
-| `HighchartsModuleFactory` | Type | Accepted module factory shape. |
-
-## Wrapper Capabilities
+### Wrapper Capabilities
 
 | Capability | API |
 | :--- | :--- |
@@ -368,6 +399,30 @@ The wrapper does not limit chart types. If Highcharts supports it and the requir
 | Module registration | `initHighchartsModules(Highcharts, ...modules)` |
 | Module globals | `exposeHighchartsGlobals(Highcharts)` |
 | Responsive reflow | `ResizeObserver` plus window resize fallback |
+
+<a id="run-locally"></a>
+<a id="development"></a>
+
+## Local Development
+
+```bash
+git clone https://github.com/alexandroit/react-highcharts.git
+cd react-highcharts
+npm ci
+npm run check
+```
+
+## Consumer Smoke Test
+
+`npm run check` builds the library and checks its public package contents and existing behavior. Run `npm run test:consumer` for the existing installed-consumer matrix.
+
+## Release Checklist
+
+- Run `npm ci`, `npm run check`, and the applicable browser or consumer checks.
+- Review `npm audit` and `npm audit --omit=dev` separately.
+- Review the packed README, declarations, exports, license, and compatibility metadata.
+- Publish through the [GitHub Actions workflow](https://github.com/alexandroit/react-highcharts/actions/workflows/publish.yml) using the tested artifact's SHA-512 digest.
+- Verify the exact npm tarball, version, and GitHub provenance after publication; never replace a published version.
 
 ## Changelog
 
@@ -403,8 +458,17 @@ The wrapper does not limit chart types. If Highcharts supports it and the requir
 - Added `updateMode="series-data"` for live charts that should update existing series instead of recreating the chart.
 - Added a small chart DOM sanitizer for invalid SVG `visibility="NaN"` output from derived Highcharts modules.
 
+## Community and Support
+
+Report reproducible package issues in the [issue tracker](https://github.com/alexandroit/react-highcharts/issues). Use the [security policy](https://github.com/alexandroit/react-highcharts/blob/main/SECURITY.md) for security reports.
+
+- [Stackline / Alexandro.Net](https://alexandro.net/)
+- [GitHub](https://github.com/alexandroit)
+- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
+- [Reddit community: r/Stackline](https://www.reddit.com/r/Stackline/)
+
 ## License
 
-The React wrapper in this repository is released under the [MIT License](LICENSE).
+The React wrapper in this repository is released under the [MIT License](https://github.com/alexandroit/react-highcharts/blob/main/LICENSE).
 
 Highcharts is a separate peer dependency and is not distributed under this repository's MIT license. Review the [Highcharts licensing terms](https://www.highcharts.com/license) for your application.
