@@ -1,44 +1,18 @@
 # @stackline/react-highcharts
 
-> A maintained React 19 wrapper for Highcharts, Highstock, and Highmaps applications, with standard chart rendering, constructor switching, module registration helpers, native chart instance access, resize-aware rendering, controlled update modes, and versioned live demos.
+> A maintained React 19 wrapper for Highcharts, Highstock, and Highmaps with native options, constructor switching, module helpers, refs, and realtime update modes.
 
 [![npm version](https://img.shields.io/npm/v/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
-[![npm monthly](https://img.shields.io/npm/dm/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
-[![license](https://img.shields.io/npm/l/@stackline/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts/blob/main/LICENSE)
-[![React 19](https://img.shields.io/badge/React-19.x-61dafb?style=flat-square&logo=react&logoColor=111111)](https://react.dev/)
-[![Highcharts](https://img.shields.io/badge/Highcharts-6%2B-2f7ed8?style=flat-square)](https://www.highcharts.com/)
+[![license](https://img.shields.io/npm/l/@stackline/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts)
+[![GitHub repository](https://img.shields.io/badge/GitHub-alexandroit%2Freact-highcharts-181717?style=flat-square&logo=github)](https://github.com/alexandroit/react-highcharts)
+[![Docs](https://img.shields.io/badge/docs-alexandro.net-0f766e?style=flat-square)](https://alexandro.net/docs/react/react-highcharts/)
 [![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
 
-**[Documentation & Live Demos](https://alexandro.net/docs/react/react-highcharts/)** | **[React 19 Demo](https://alexandro.net/docs/react/react-highcharts/react-19/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)** | **[Community Discussions](https://www.reddit.com/r/Stackline/)**
+**[Documentation](https://alexandro.net/docs/react/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
 
-<p align="center">
-  <img src="https://assets.alexandro.net/2026/06/react-highcharts-live.png" alt="Stackline React Highcharts live examples" width="920">
-</p>
-
-**Package version:** `19.1.2`
+**Current package version:** `19.1.3`
 
 ---
-
-> **Credits:** Stackline React Highcharts is maintained by [Alexandro Paixao Marques](https://github.com/alexandroit/react-highcharts). The package keeps the wrapper intentionally thin so React applications can use the native Highcharts API directly instead of learning a second chart abstraction.
-
----
-
-## Contents
-
-- [Why this package?](#why-this-package)
-- [Compatibility](#compatibility)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [Security](#security)
-- [API Surface](#api-surface)
-- [Local Development](#local-development)
-- [Consumer Smoke Test](#consumer-smoke-test)
-- [Release Checklist](#release-checklist)
-- [Community and Support](#community-and-support)
-- [License](#license)
-
-<a id="why-this-library"></a>
 
 ## Why this package?
 
@@ -52,7 +26,7 @@ The React 19 package family is intended for React `19.x` applications. Release `
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/react-highcharts@19.1.2` |
+| Package | `@stackline/react-highcharts@19.1.3` |
 | Peer: `highcharts` | `>=6.0.0 <=13.0.2` |
 | Peer: `react` | `>=19.0.0 <20.0.0` |
 | Peer: `react-dom` | `>=19.0.0 <20.0.0` |
@@ -68,7 +42,7 @@ Each package family targets one React major. Keep the package major aligned with
 
 | Package family | React family | Peer range | Install |
 | :---: | :---: | :---: | :--- |
-| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact` |
+| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.3 highcharts@13.0.2 --save-exact` |
 | `18.x` | React `18.x` | `>=18.0.0 <19.0.0` | `npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact` |
 | `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | `npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact` |
 
@@ -101,7 +75,7 @@ npm install @stackline/react-highcharts highcharts
 
 The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
 
-Use `npm install @stackline/react-highcharts@19.1.2 highcharts@13.0.2 --save-exact` when your release process pins exact dependency versions.
+Use `npm install @stackline/react-highcharts@19.1.3 highcharts@13.0.2 --save-exact` when your release process pins exact dependency versions.
 
 ## Usage
 
@@ -458,17 +432,25 @@ npm run check
 - Added `updateMode="series-data"` for live charts that should update existing series instead of recreating the chart.
 - Added a small chart DOM sanitizer for invalid SVG `visibility="NaN"` output from derived Highcharts modules.
 
-## Community and Support
-
-Report reproducible package issues in the [issue tracker](https://github.com/alexandroit/react-highcharts/issues). Use the [security policy](https://github.com/alexandroit/react-highcharts/blob/main/SECURITY.md) for security reports.
-
-- [Stackline / Alexandro.Net](https://alexandro.net/)
-- [GitHub](https://github.com/alexandroit)
-- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
-- [Reddit community: r/Stackline](https://www.reddit.com/r/Stackline/)
-
 ## License
 
 The React wrapper in this repository is released under the [MIT License](https://github.com/alexandroit/react-highcharts/blob/main/LICENSE).
 
 Highcharts is a separate peer dependency and is not distributed under this repository's MIT license. Review the [Highcharts licensing terms](https://www.highcharts.com/license) for your application.
+
+## Credits and original authors
+
+- Copyright (c) 2026 Alexandro Marques.
+- Stackline maintenance: [Alexandro Paixao Marques](https://www.linkedin.com/in/aleinfo/) and [Stackline contributors](https://github.com/alexandroit).
+
+Original copyright, license notices and contributor acknowledgements remain part of this distribution. Stackline maintenance does not replace authorship of the original work.
+
+## Community and Links
+
+- [Stackline website](https://alexandro.net/)
+- [GitHub projects](https://github.com/alexandroit)
+- [npm packages](https://www.npmjs.com/~alex360qc)
+- [Reddit community — r/Stackline](https://www.reddit.com/r/Stackline/)
+- [Maintainer LinkedIn](https://www.linkedin.com/in/aleinfo/)
+
+Use this repository's issue tracker for reproducible bugs and feature requests. Join r/Stackline for examples, usage questions and release discussions.
