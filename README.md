@@ -4,13 +4,13 @@
 
 [![npm version](https://img.shields.io/npm/v/@stackline/react-highcharts.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/react-highcharts)
 [![license](https://img.shields.io/npm/l/@stackline/react-highcharts.svg?style=flat-square)](https://github.com/alexandroit/react-highcharts)
-[![GitHub repository](https://img.shields.io/badge/GitHub-alexandroit%2Freact-highcharts-181717?style=flat-square&logo=github)](https://github.com/alexandroit/react-highcharts)
+[![GitHub repository](https://img.shields.io/badge/GitHub-repository-181717?style=flat-square&logo=github)](https://github.com/alexandroit/react-highcharts)
 [![Docs](https://img.shields.io/badge/docs-alexandro.net-0f766e?style=flat-square)](https://alexandro.net/docs/react/react-highcharts/)
 [![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
 
 **[Documentation](https://alexandro.net/docs/react/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
 
-**Current package version:** `19.1.3`
+**Current package version:** `19.1.4`
 
 ---
 
@@ -26,7 +26,7 @@ The React 19 package family is intended for React `19.x` applications. Release `
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/react-highcharts@19.1.3` |
+| Package | `@stackline/react-highcharts@19.1.4` |
 | Peer: `highcharts` | `>=6.0.0 <=13.0.2` |
 | Peer: `react` | `>=19.0.0 <20.0.0` |
 | Peer: `react-dom` | `>=19.0.0 <20.0.0` |
@@ -42,7 +42,7 @@ Each package family targets one React major. Keep the package major aligned with
 
 | Package family | React family | Peer range | Install |
 | :---: | :---: | :---: | :--- |
-| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.3 highcharts@13.0.2 --save-exact` |
+| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.4 highcharts@13.0.2 --save-exact` |
 | `18.x` | React `18.x` | `>=18.0.0 <19.0.0` | `npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact` |
 | `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | `npm install @stackline/react-highcharts@17.0.0 highcharts@12.6.0 --save-exact` |
 
@@ -75,7 +75,7 @@ npm install @stackline/react-highcharts highcharts
 
 The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
 
-Use `npm install @stackline/react-highcharts@19.1.3 highcharts@13.0.2 --save-exact` when your release process pins exact dependency versions.
+Use `npm install @stackline/react-highcharts@19.1.4 highcharts@13.0.2 --save-exact` when your release process pins exact dependency versions.
 
 ## Usage
 
