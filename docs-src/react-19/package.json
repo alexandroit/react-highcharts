@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "highcharts": "13.0.2",
+    "highcharts": "13.1.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "@stackline/react-highcharts": "19.1.2"
