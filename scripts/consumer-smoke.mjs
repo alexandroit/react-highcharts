@@ -25,9 +25,9 @@ const tarball = configuredTarball
 assert.ok(fs.existsSync(tarball), `Package tarball not found: ${tarball}`);
 
 const matrices = [
-  { name: 'legacy-peer-floor', react: '19.0.0', highcharts: '6.2.0' },
-  { name: 'previous-highcharts', react: '19.0.0', highcharts: '12.6.0' },
-  { name: 'current', react: '19.2.8', highcharts: '13.0.2' }
+  { name: 'patched-highcharts-11', react: '19.0.0', highcharts: '11.4.9' },
+  { name: 'previous-highcharts', react: '19.0.0', highcharts: '12.6.2' },
+  { name: 'current', react: '19.2.8', highcharts: '13.1.1' }
 ];
 
 try {
@@ -41,7 +41,6 @@ try {
       type: 'module',
       dependencies: {
         '@stackline/react-highcharts': `file:${tarball}`,
-        ...(matrix.highcharts.startsWith('6.') ? { '@types/highcharts': '5.0.44' } : {}),
         '@types/react': '19.2.18',
         '@types/react-dom': '19.2.4',
         highcharts: matrix.highcharts,

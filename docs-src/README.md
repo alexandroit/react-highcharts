@@ -21,4 +21,6 @@ the current package line and the framework vendor's supported release lifecycle.
 
 ## Current React 19 documentation
 
-The current demo uses the published `@stackline/react-highcharts@19.1.2` package with React 19.2.8 and Highcharts 13.0.2. Its lockfile records the npm tarball URL and SHA-512 integrity. Run `npm --prefix docs-src/react-19 ci --ignore-scripts` followed by `npm run build:docs` from the repository root. The output is `docs/react-19`; package imports resolve to the installed npm package.
+The current demo installs the repository package through `file:../..` with React 19.2.8 and Highcharts 13.1.1, so CI validates the release candidate before publication. Run `npm ci`, `npm run build`, `npm --prefix docs-src/react-19 ci --ignore-scripts`, then `npm run build:docs`. The output is `docs/react-19`.
+
+The React 17 and 18 demos retain their published wrappers. Their patch-scoped `highcharts` override selects 12.6.2 because those older wrappers cap the peer at 12.6.0. The demo builds validate this compatibility; the override does not change the published wrappers.

@@ -12,7 +12,8 @@ Highcharts.setOptions({
   colors: ['#0d5c9e', '#30a46c', '#d26a2a', '#b43f3f', '#6d52b5']
 });
 
-const INSTALL_CODE = `npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.0 --save-exact`;
+const INSTALL_CODE = `npm pkg set 'overrides.@stackline/react-highcharts.highcharts=12.6.2'
+npm install @stackline/react-highcharts@18.0.0 highcharts@12.6.2 --save-exact`;
 
 const SETUP_CODE = `import Highcharts from 'highcharts/highstock';\nimport { Chart } from '@stackline/react-highcharts';\n\n<Chart highcharts={Highcharts} options={myOptions} />`;
 
@@ -3291,7 +3292,7 @@ export function App({ reactLine }: AppProps) {
       <main className="shell">
         <header>
           <div className="header-copy">
-            <span>React {reactLine} runtime / Highcharts 12.6.0</span>
+            <span>React {reactLine} runtime / Highcharts 12.6.2</span>
             <h1>@stackline/react-highcharts 18.0.0</h1>
             <p>Project generated with the React 18 Vite blueprint and running the maintained React 18 package line.</p>
           </div>
@@ -3454,7 +3455,7 @@ export function App({ reactLine }: AppProps) {
     <main className="shell">
       <header>
         <div className="header-copy">
-          <span>React {reactLine} runtime / Highcharts 12.6.0</span>
+          <span>React {reactLine} runtime / Highcharts 12.6.2</span>
           <h1>@stackline/react-highcharts 18.0.0</h1>
           <p>
             React 18 wrapper line for Highcharts, StockChart, modules, event callbacks,

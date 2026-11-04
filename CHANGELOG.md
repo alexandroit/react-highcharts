@@ -4,6 +4,12 @@ All notable changes to `@stackline/react-highcharts` are documented here.
 
 ## Unreleased
 
+## 19.1.5 - 2026-11-04
+
+- Require patched Highcharts 11.4.9, 12.6.2, or 13.1.1 and verify each supported major in installed-consumer tests. Applications must update their Highcharts dependency and lockfile.
+- Refresh affected development dependencies and run CI and provenance publishing on patched Node.js 22.23.4 / 24.22.2.
+- Validate the React 19 documentation against the package being built and replace a stale hardcoded package-version assertion.
+
 ## 19.1.2 - 2026-09-28
 
 - Organize package documentation, preserve examples and compatibility guidance, and add verified Stackline community links.

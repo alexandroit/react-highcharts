@@ -9,8 +9,8 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const packageJson = JSON.parse(fs.readFileSync(path.join(rootDir, 'package.json'), 'utf8'));
 
 assert.equal(packageJson.name, '@stackline/react-highcharts');
-assert.equal(packageJson.version, '19.1.2');
-assert.equal(packageJson.peerDependencies.highcharts, '>=6.0.0 <=13.0.2');
+assert.match(packageJson.version, /^19\.\d+\.\d+$/);
+assert.equal(packageJson.peerDependencies.highcharts, '^11.4.9 || ^12.6.2 || ^13.1.1');
 assert.equal(packageJson.peerDependencies.react, '>=19.0.0 <20.0.0');
 assert.equal(packageJson.peerDependencies['react-dom'], '>=19.0.0 <20.0.0');
 assert.equal(packageJson.exports['.'].import.types, './dist/index.d.ts');
@@ -26,6 +26,7 @@ const pack = JSON.parse(execFileSync('npm', ['pack', '--dry-run', '--json'], {
   cwd: rootDir,
   encoding: 'utf8'
 }))[0];
+assert.equal(pack.version, packageJson.version);
 const files = pack.files.map((entry) => entry.path);
 
 for (const expected of [

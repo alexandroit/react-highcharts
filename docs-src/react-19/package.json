@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "highcharts": "13.0.2",
+    "highcharts": "13.1.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "@stackline/react-highcharts": "19.1.2"
+    "@stackline/react-highcharts": "file:../.."
   },
   "devDependencies": {
     "@types/node": "24.10.1",
@@ -20,6 +20,6 @@
     "@types/react-dom": "19.2.4",
     "@vitejs/plugin-react": "6.1.0",
     "typescript": "5.9.3",
-    "vite": "8.2.1"
+    "vite": "8.3.5"
   }
 }
