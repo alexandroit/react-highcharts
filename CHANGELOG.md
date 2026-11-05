@@ -1,5 +1,10 @@
 # Changelog
 
+## 19.1.7 - 2026-11-04
+
+- Preserve the original React version recorded in the historical 19.1.0 README changelog.
+- Keep current React 19.3.1 validation and current release metadata separate from historical notes.
+
 ## 19.1.6 - 2026-11-04
 
 - Refresh the current framework and compatible build/test dependencies.

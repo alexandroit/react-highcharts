@@ -10,7 +10,7 @@
 
 **[Documentation](https://alexandro.net/docs/react/react-highcharts/)** | **[npm](https://www.npmjs.com/package/@stackline/react-highcharts)** | **[Issues](https://github.com/alexandroit/react-highcharts/issues)** | **[Repository](https://github.com/alexandroit/react-highcharts)**
 
-**Current package version:** `19.1.6`
+**Current package version:** `19.1.7`
 
 ---
 
@@ -20,13 +20,13 @@
 
 The goal is not to hide Highcharts. Your application still owns the real Highcharts options object, the Highcharts instance, module registration, constructor choice, event callbacks, and native chart instance. The wrapper gives React a stable `<Chart>` component, typed props, ref access, resize-aware rendering, SSR-safe effects, module helper utilities, and update modes that avoid unnecessary full chart recreation.
 
-The React 19 package family is intended for React `19.x` applications. Release `19.1.6` is validated with React `19.3.1` and Highcharts `13.1.1`. The validation app renders static chart examples, realtime market examples, and verifies that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
+The React 19 package family is intended for React `19.x` applications. Release `19.1.7` is validated with React `19.3.1` and Highcharts `13.1.1`. The validation app renders static chart examples, realtime market examples, and verifies that dynamic charts update existing Highcharts series instead of blinking through full object recreation.
 
 ## Compatibility
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/react-highcharts@19.1.6` |
+| Package | `@stackline/react-highcharts@19.1.7` |
 | Peer: `highcharts` | `^11.4.9 \|\| ^12.6.2 \|\| ^13.1.1` |
 | Peer: `react` | `>=19.0.0 <20.0.0` |
 | Peer: `react-dom` | `>=19.0.0 <20.0.0` |
@@ -42,7 +42,7 @@ Each package family targets one React major. Keep the package major aligned with
 
 | Package family | React family | Peer range | Install |
 | :---: | :---: | :---: | :--- |
-| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.6 highcharts@13.1.1 --save-exact` |
+| `19.x` | React `19.x` | `>=19.0.0 <20.0.0` | `npm install @stackline/react-highcharts@19.1.7 highcharts@13.1.1 --save-exact` |
 | `18.x` | React `18.x` | `>=18.0.0 <19.0.0` | Historical line; see the security note below |
 | `17.x` | React `17.x` | `>=17.0.0 <18.0.0` | Historical line; see the security note below |
 
@@ -75,7 +75,7 @@ npm install @stackline/react-highcharts highcharts
 
 The package declares `highcharts`, `react`, and `react-dom` as peer dependencies so your application owns the Highcharts build, modules, license, and React runtime.
 
-Use `npm install @stackline/react-highcharts@19.1.6 highcharts@13.1.1 --save-exact` when your release process pins exact dependency versions.
+Use `npm install @stackline/react-highcharts@19.1.7 highcharts@13.1.1 --save-exact` when your release process pins exact dependency versions.
 
 ## Usage
 
@@ -402,7 +402,7 @@ npm run check
 
 ### 19.1.0
 
-- Validated React 19.3.1, React DOM 19.3.1, and Highcharts 13.0.1 without changing the wrapper API.
+- Validated React 19.2.8, React DOM 19.2.8, and Highcharts 13.0.1 without changing the wrapper API.
 - Fixed imperative refs so `chart` and `container` always expose the live instances.
 - Fixed consecutive `immutable` updates so every requested recreation is applied.
 - Added lifecycle, module, package, browser, and audit release contracts.
