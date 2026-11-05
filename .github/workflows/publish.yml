@@ -35,6 +35,7 @@ jobs:
       - run: npm install --global npm@11.19.1
       - run: npm ci
       - run: npm run check
+      - run: npm audit --audit-level=low
       - name: Reject an existing public version
         shell: bash
         run: |
@@ -63,6 +64,8 @@ jobs:
             exit 1
           fi
           (cd artifact && sha512sum *.tgz > SHA512SUMS)
+      - name: Validate the exact npm README
+        run: python3 .github/scripts/check-release-readme.py artifact/*.tgz
       - name: Prepare production SBOM
         run: |
           npm sbom --omit=dev --sbom-format cyclonedx > artifact/sbom.cdx.json

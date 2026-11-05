@@ -30,4 +30,5 @@ type HighchartsModuleFactory = ((highcharts: typeof Highcharts) => void) | {
 declare function exposeHighchartsGlobals(highcharts: typeof Highcharts): void;
 declare function initHighchartsModules(highcharts: typeof Highcharts, ...modules: HighchartsModuleFactory[]): void;
 
-export { Chart, type ChartHandle, type ChartProps, type ConstructorType, type HighchartsModuleFactory, exposeHighchartsGlobals, initHighchartsModules };
+export { Chart, exposeHighchartsGlobals, initHighchartsModules };
+export type { ChartHandle, ChartProps, ConstructorType, HighchartsModuleFactory };

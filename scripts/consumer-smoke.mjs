@@ -27,7 +27,7 @@ assert.ok(fs.existsSync(tarball), `Package tarball not found: ${tarball}`);
 const matrices = [
   { name: 'patched-highcharts-11', react: '19.0.0', highcharts: '11.4.9' },
   { name: 'previous-highcharts', react: '19.0.0', highcharts: '12.6.2' },
-  { name: 'current', react: '19.2.8', highcharts: '13.1.1' }
+  { name: 'current', react: '19.3.1', highcharts: '13.1.1' }
 ];
 
 try {
